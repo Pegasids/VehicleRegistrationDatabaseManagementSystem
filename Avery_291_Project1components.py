@@ -413,7 +413,6 @@ def ViolationRecord(curs):
       return
 
 
-
 def Search1(curs):
    '''
    List the name, licence_no, addr, birthday, driving class, driving_condition, 
