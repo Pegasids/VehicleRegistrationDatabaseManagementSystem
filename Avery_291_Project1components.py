@@ -76,6 +76,8 @@ def Create_all_the_tables(curs):
 def Populate_the_shit(curs):
    '''
    function which populates our database with tuples
+
+   known issues: unknown format type for DATE and BLOB
    '''
 
    data_peopletable =   [('111111111111111', "John Oliver", 167.23, 63, "blue", "black", "8407 63 Ave Edmonton", "m", "02-09-1997"),
@@ -94,7 +96,7 @@ def Populate_the_shit(curs):
                         ('111111111111124', 'Ronia Rovarsdotter', 165.45, 69.54, 'blue', 'black', '1839 85 Ave Edmonton', 'f', '27-01-1990'),
                         ('111111111111125', 'Pippi Langstrump', 176.45,75.45, 'blue', 'blonde', '1920 73 Ave Edmonton', 'f', '15-07-1995')]
    curs.bindarraysize = 15
-   curs.setinputsizes(15, 40, float, float, 10,10,50,1,"DATE")
+   curs.setinputsizes(15, 40, float, float, 10,10,50,1,10) #position 8 is DATE! floats are number(5,2)
    curs.executemany("INSERT INTO people(sin, name, height, weight, eyecolor, haircolor, addr, gender,birthday) "
                                  "VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9)", data_peopletable)
 
@@ -118,7 +120,7 @@ def Populate_the_shit(curs):
                               ('100000000000014', '111111111111124', 'A', 'PHOTO', '08-03-2014', '08-03-2019'),
                               ('100000000000015', '111111111111125', 'D', 'photo', '08-07-2012', '08-07-2017')]
    curs.bindarraysize = 15
-   curs.setinputsizes(15, 15, 10, "BLOB", "DATE","DATE")
+   curs.setinputsizes(15, 15, 10, 10, 10,10) #position 3 is BLOB!! position  position 4 and 5 is DATE!!
    curs.executemany("INSERT INTO drive_licence(licence_no,sin,class,photo,issuing_date, expiring_date) "
                                  "VALUES (:1, :2, :3, :4, :5, :6)", data_drivelicencetable)
 
@@ -151,24 +153,153 @@ def Populate_the_shit(curs):
                                  "VALUES(:1,:2)", data_restrictiontable)
 
 
+
+
+
+
+   data_vehicletypetable = [(10,"SUV"), (11,"Hatchback"), (12,"Sedan"),(13,"Truck"),(14,"Van")]
+   curs.bindarraysize = 5
+   curs.setinputsizes(int,10)
+   curs.executemany("INSERT INTO vehicle_type(type_id, type)"
+                                 "VALUES(:1,:2)", data_vehicletypetable)
+
+
+
+
+
+   data_vehicletable = [("122222222222220", "Honda", "Civic", 2004, "blue", 12),
+                        ("122222222222221","Subaru", "Crosstrek", 2014, "black", 11),
+                        ("122222222222222", "Toyota", "Corolla", 2007, "white", 12),
+                        ("122222222222223", "Ford", "Focus", 2007, "black", 10),
+                        ("122222222222224", "BMW", "Serio", 2010, "black", 12),
+                        ("122222222222225", "RAM", "Bizarro", 2009, "red", 13),
+                        ("122222222222226", "Mitsubishi", "Lancer", 2009, "white", 12),
+                        ("122222222222227", "Dodge", "Focus", 2002, "black", 13),
+                        ("122222222222228", "Subaru", "Forrester", 2015,"green", 10),
+                        ("122222222222229", "Toyota", "Camry", 2010, "black", 12),
+                        ("122222222222230", "Ford", "holla", 2007,"blue", 14),
+                        ("122222222222231", "Ford", "Mustang", 2014,"black", 12),
+                        ("122222222222232", "Honda", "Ascend", 2008,"blue", 11),
+                        ("122222222222233", "Mazda", "T1", 2010,"black", 11),
+                        ("122222222222232", "ssangyong", "Nadya", 2011, "white", 14),
+                        ("122222222222233", "Toyota", "Kijang", 2007, "blue", 14),
+                        ("122222222222234", "tata", "Abend", 2008,"black", 13),
+                        ("122222222222235", "Toyota", "Corolla", 2008,"white", 12),
+                        ("122222222222236", "BMW", "Serio", 2010, "red", 12),
+                        ("122222222222237", "Ford", "Focus", 2009,"black", 10),
+                        ("122222222222238", "Mazda", "T2", 2015, "blue", 13),
+                        ("122222222222239", "Honda", "Civic", 2009,"red", 12),
+                        ("122222222222240", "Subaru", "Crosstrek", 2015,"white", 11)]
+   curs.bindarraysize = 23
+   curs.setinputsizes(15,20,20,int,10,int)
+   curs.executemany("INSERT INTO vehicle(serial_no, maker,model,year,color,type_id)"
+                                    "VALUES(:1,:2,:3,:4,:5,:6)", data_vehicletable)
+
+
+
+
+   data_ownertable = [("111111111111111", "122222222222220", 'y'),
+                      ("111111111111112", "122222222222221", 'y'),
+                      ("111111111111113", "122222222222222", 'y'),
+                      ("111111111111114", "122222222222223", 'y'),
+                      ("111111111111115", "122222222222224", 'y'),
+                      ("111111111111116", "122222222222225", 'y'),
+                      ("111111111111117", "122222222222226", 'y'),
+                      ("111111111111118", "122222222222227", 'y'),
+                      ("111111111111119", "122222222222228", 'y'),
+                      ("111111111111120", "122222222222229", 'y'),
+                      ("111111111111121", "122222222222230", 'y'),
+                      ("111111111111122", "122222222222231", 'y'),
+                      ("111111111111123", "122222222222232", 'y'),
+                      ("111111111111124", "122222222222233", 'y'),
+
+                      ("111111111111125", "122222222222234", 'n'),
+                      ("111111111111120", "122222222222235", 'n'),
+                      ("111111111111121", "122222222222236", 'n'),
+                      ("111111111111122", "122222222222237", 'n'),
+                      ("111111111111123", "122222222222238", 'n'),
+                      ("111111111111124", "122222222222239", 'n'),
+                      ("111111111111125", "122222222222240", 'n'),
+
+                      ("111111111111111", "122222222222234", 'y'),
+                      ("111111111111112", "122222222222235", 'y'),
+                      ("111111111111113", "122222222222236", 'y'),
+                      ("111111111111114", "122222222222237", 'y'),
+                      ("111111111111115", "122222222222238", 'y'),
+                      ("111111111111116", "122222222222239", 'y'),
+                      ("111111111111117", "122222222222240", 'y')]
+   curs.bindarraysize = 30
+   curs.setinputsizes(15,15,1)
+   surs.executemany("INSERT INTO owner(owner_id, vehicle_id, is_primary_owner)"
+                              "VALUES(:1,:2,:3)", data_ownertable)
+
+
+
+
+   #only records sales between non-commercial individuals/entities, not sales between first-time buyers and car dealerships.
+   data_auto_sale_table = [(21, "111111111111121", "111111111111113", "122222222222222", "02-02-2009", 15000.00),
+                           (22, "111111111111120", "111111111111112", "122222222222223", "02-04-2010", 17000.00),
+                           (23, "111111111111112", "111111111111114", "122222222222223", "09-09-2015", 20000.00),
+                           (24, "111111111111111", "111111111111125", "122222222222234", "01-09-2015", 5000.00),
+                           (25, "111111111111121", "111111111111126", "122222222222237", "02-03-2012", 5000.00),
+                           (26, "111111111111126", "111111111111127", "122222222222237", "02-04-2013", 7000.00), 
+                           (27, "111111111111127", "111111111111128", "122222222222237", "03-05-2013", 7500.00),
+                           (28, "111111111111128", "111111111111114", "122222222222237", "04-02-2015", 4000.00),
+                           (29, "111111111111119", "111111111111111", "122222222222220", "03-04-2013", 12000.00),
+                           (30, "111111111111124", "111111111111115", "122222222222224", "03-02-2014", 10000.00)]
+   curs.bindarraysize = 10
+   curs.setinputsizes(int,15, 15,15,10,float) #position 4 is DATE! float is numberic(9,2)
+   surs.executemany("INSERT INTO auto_sale(transaction_id, seller_id, buyer_id, vehicle_id, s_date, price)"
+                              "VALUES(:1,:2,:3,:4,:5,:6)", data_auto_sale_table)
+
+
+
+
+   data_ticket_type_table = [("Speeding", 150), ("Parking", 50), ("Intersect", 200), ("Halting", 50), ("E Speeding", 350)]
+   curs.bindarraysize = 5
+   curs.setinputsizes(10,float) #float is number(5,2)
+   surs.executemany("INSERT INTO ticket_type(vtype, fine)"
+                              "VALUES(:1,:2)", data_ticket_type_table)
+
+
+
+   data_ticket_table = [(101,"111111111111121", "122222222222230", "111111111111111", "Speeding", "03-03-2014", "Southampton", "He did a bad thing" ),
+                        (102,"111111111111117", "122222222222226", "111111111111111", "Parking", "02-09-2013", "Riverbend", "Parked in a no-park zone" ),
+                        (103,"111111111111124", "122222222222233", "111111111111111", "Parking", "01-06-2015", "Lowlands", "Parked in alley" ),
+                        (104,"111111111111115", "122222222222224", "111111111111112", "Halting", "03-04-2012", "Marshuggah", "Mother didn't teach him nothing" ),
+                        (105, "111111111111121", "122222222222230","111111111111111", "Parking", "09-08-2010", "Southampton", "firehydrant parking"),
+                        (106, "111111111111121", "122222222222230","111111111111112", "Parking", "03-01-2013", "Southampton", "Parked near stop sign"),
+                        (107, "111111111111119", "122222222222228", "111111111111111", "E Speeding", "02-02-2009", "Eastview", "sped in excess of 150km/h"),
+                        (108, "111111111111113", "122222222222222", "111111111111112", "Intersect", "05-04-2010", "Glendon", "did non-premissible thing"),
+                        (109, "111111111111113", "122222222222222", "111111111111111", "Speeding", "04-01-2014", "Barking", "sped through highway"),
+                        (110, "111111111111113", "122222222222222", "111111111111112", "Parking", "03-03-2011", "Pistleton", "sped like a beast")]
+   curs.bindarraysize = 10
+   curs.setinputsizes(int, 15, 15,15,10,10, 20,1024) #position 6 is DATE!
+   surs.executemany("INSERT INTO ticket(ticket_no, violator_no, vehicle_id, office_no, vtype,vdate,place,descriptions)"
+                              "VALUES(:1,:2,:3,:4,:5,:6,:7,:8)", data_ticket_table)
+
+
 def LicenceRegistration(curs):
    """
    This component is used to record the information needed to issuing a 
    drive licence, including the personal information and a picture for 
    the driver. You may assume that all the image files are stored in a 
    local disk system.
-   """
-   collection_of_sin_from_people_table = set()
 
+   known issues: Unknown format for DATE and BLOB
+   """
+   exit_flag == False
    curs.execute("SELECT sin from people")
-   rows = curs.fetchall()
-   for r in rows:
-      collection_of_sin_from_people_table.add(r)
+   collection_of_sin_from_people_table = set(curs.fetchall())
+
 
    sin = input("please enter sin number")
 
    while sin =='':
-      sin = input("empty sin, please enter sin again")
+      sin = input("empty sin, please enter sin again or type exit to exit to main menu")
+      if sin == "exit":
+        return
+
 
 
    if sin not in collection_of_sin_from_people_table:
@@ -182,28 +313,40 @@ def LicenceRegistration(curs):
          p_addr = input("please enter address")
          p_gender = input("please enter gender. m/f")
          p_birthday = input("please enter birthday")
-         curs.execute("INSERT INTO people VALUES({},{},{},{},{},{},{},{},{})".format(sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday))
+         confirm = input("confirm entering:({},{},{},{},{},{},{},{},{}) Enter y to confirm, n to return to main menu".format(sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday))
+         if confirm == 'y':
+            curs.execute("INSERT INTO people VALUES({},{},{},{},{},{},{},{},{})".format(sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday))
+         else:
+            return
 
          licence_no = input("please enter license number")
          classs = input("please enter class")
          photo = input("please enter photo")
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
-         curs.execute("INSERT INTO drive_licence VALUES({},{},{},{},{},{})".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+         confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+         if confirm == 'y':
+            curs.execute("INSERT INTO drive_licence VALUES({},{},{},{},{},{})".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+         else: 
+            return
 
       elif choice =='n':
          exit_or_redo = input("would you like to reinput the sin number or exit driver licence registration input? input 'redo' or 'exit'")
          if exit_or_redo == 'exit':
-            return 0
+            return
          elif exit_or_redo =='redo':
-            driver_licence_registration()
+            LicenceRegistration()
    else:
       licence_no = input("please enter license number")
       classs = input("please enter class")
       photo = input("please enter photo")
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
-      curs.execute("INSERT INTO drive_licence VALUES({},{},{},{},{},{})".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+      confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+      if confirm =='y':
+         curs.execute("INSERT INTO drive_licence VALUES({},{},{},{},{},{})".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+      else:
+         return
 
 
 def ViolationRecord(curs):
@@ -213,69 +356,62 @@ def ViolationRecord(curs):
    ticket_type has been loaded in the initial database.
    '''
 
-   col_violator_sin__people = set()
-   col_veh_id__vehicle = set()
-   col_off_no__people = set()
-   col_tick_type__ticket_type = set()
-   col_tick_no__ticket = set()
 
    curs.execute("SELECT ticket_no from ticket")
-   rows = curs.fetchall()
-   for r in rows:
-      col_tick_no__ticket.add(r)
+   col_tick_no__ticket= set(curs.fetchall())
 
    curs.execute("SELECT sin from people")
-   rows = curs.fetchall()
-   for r in rows:
-      col_violator_sin__people.add(r)
-      col_off_no__people.add(r)
+   col_violator_sin__people = set(curs.fetchall())
+   col_off_no__people = set(curs.fetchall())
 
    curs.execute("SELECT vehicle_id from vehicle")
-   rows = curs.fetchall()
-   for r in rows:
-      col_veh_id__vehicle.add(r)
+   col_veh_id__vehicle = set(curs.fetchall())
 
    curs.execute("SELECT vtype from ticket_type")
-   rows = curs.fetchall()
-   for r in rows:
-      col_tick_type__ticket_type.add(r)
+   col_tick_type__ticket_type = set(curs.fetchall())
 
 
    ticker_no = input("please enter ticket number")
    while ticker_no in col_tick_no__ticket :
-      ticker_no = input("ticket number must be unique")
-
+      ticker_no = input("ticket number must be unique. reenter, or enter 'exit' to return to main menu")
+         if ticker_no == 'exit':
+            return
 
    violator_no = input("please enter violator no")
    while violator_no not in (col_violator_sin__people):
-      violator_no = input("no such violator exists. please reinput violator_no")
+      violator_no = input("no such violator exists. please reinput violator_no or type 'exit' to return ot main menu")
+         if violator_no == 'exit':
+            return
 
-   vehicle_id = input("pleaseenter vehicle id")
+   vehicle_id = input("please enter vehicle id")
    while vehicle_id not in col_veh_id__vehicle:
-      vehicle_id = input("no such vehicle exists. please reenter vehicle id")
+      vehicle_id = input("no such vehicle exists. please reenter vehicle id or type 'exit' to return to menu")
+      if vehicle_id == 'exit':
+         return
 
    office_no = input("please enter officier number")
    while office_no not in col_off_no__people:
-      office_no = input("no such person exists, please reeneter officer number")
+      office_no = input("no such person exists, please reeneter officer number or type 'exit' to return to menu")
+      if office_no == 'exit':
+         return
 
    vtype = input("please enter violation type")
    while vtype not in col_tick_type__ticket_type:
-      vtype = input("no such type, please reenter violation type")
+      vtype = input("no such type, please reenter violation type or type exit to return to menu")
+      if vtype =='exit':
+         return
 
    vdate = input("please enter violation date")
    place = input("please enter violation place")
    description = input("please enter description")
 
    print ("values for to be inserted: {},{},{},{},{},{},{},{}").format(ticker_no,violator_no,vehicle_id,office_no,vtype,vdate,place,description)
-   confirmation = input("confirm data entry. y/n")
+   confirmation = input("confirm data entry. y to confirm, n to exit to menu")
    if confirmation == 'y':
       curs.execute("INSERT INTO ticket VALUES({},{},{},{},{},{},{},{})".format(ticker_no,violator_no,vehicle_id,office_no,vtype,vdate,place,description))
-   elif confirmation == 'n':
-      redo_of_exit = input("redo or exit?")
-      if redo_of_exit == 'exit':
-         return 0
-      elif redo_of_exit == 'redo':
-         ViolationRecord()
+   else:
+      return
+
 
 
 def Search1(curs):
@@ -283,20 +419,22 @@ def Search1(curs):
    List the name, licence_no, addr, birthday, driving class, driving_condition, 
    and the expiring_data of a driver by entering either a licence_no or a given name. 
    It shall display all the entries if a duplicate name is given.
+
+   Issues: How do we format the result output?
    '''
    curs.execute("SELECT name from people")
-   s1_col_pname = curs.fetchall()
+   s1_col_pname = set(curs.fetchall())
 
    curs.execute("SELECT licence_no FROM drive_licence")
-   s1_col_dllicence = curs.fetchall()
+   s1_col_dllicence = set(curs.fetchall())
 
    search_input = input("enter search term please")
 
    if (search_input in s1_col_pname) or (search_input in s1_col_dllicence):
-      curs.execute('''SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dr.description, dl.expiring_date
-                  FROM people p, drive_licence dl, driveing_condition dc, restriction r
-                  WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id
-                  ''')
+      curs.execute("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dr.description, dl.expiring_date"
+                  "FROM people p, drive_licence dl, driveing_condition dc, restriction r"
+                  "WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id"
+                  )
       s1_result = curs.fetchall()
       for r in s1_result:
          print (r)
@@ -305,29 +443,31 @@ def Search1(curs):
       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
       if redo_or_exit =='redo':
          Search1(curs)
-      elif redo_or_exit == 'exit':
-         return 0
+      else:
+         return 
 
 
 def Search2(curs):
    '''
    List all violation records received by a person if  the drive 
    licence_no or sin of a person  is entered.
+
+   Issues: same as above, how is results expected to be formated?
    '''
    curs.execute("SELECT licence_no FROM drive_licence")
-   s2_col_dllicence = curs.fetchall() #list contains all licence_no from drive_licence table
+   s2_col_dllicence = set(curs.fetchall()) #list contains all licence_no from drive_licence table
    curs.execute("SELECT sin FROM people")
-   s2_col_psin = curs.fetchall() # list contains all sin number from people table
+   s2_col_psin = set(curs.fetchall()) # list contains all sin number from people table
 
 
    search_input = input("enter sin number or licence number please")
 
    if (search_input in s2_col_psin) or (search_input in s2_col_dllicence):
-      curs.execute('''
-                  SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine
-                  FROM ticket t, ticket_type tt, people p, drive_licence dl
-                  WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype
-                  ''')
+      curs.execute(
+                  "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine"
+                  "FROM ticket t, ticket_type tt, people p, drive_licence dl"
+                  "WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype"
+                  )
       s2_result = curs.fetchall()
       for r in s2_result:
          print(r)
@@ -336,8 +476,8 @@ def Search2(curs):
       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
       if redo_or_exit =='redo':
          Search2(curs)
-      elif redo_or_exit == 'exit':
-         return 0
+      else:
+         return 
 
 
 def Search3(curs): #the sql query hasn't been built yet. Will get to that eventually, unless you guys there before me
