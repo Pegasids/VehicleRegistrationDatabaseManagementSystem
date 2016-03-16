@@ -374,14 +374,14 @@ def ViolationRecord(curs):
    ticker_no = input("please enter ticket number")
    while ticker_no in col_tick_no__ticket :
       ticker_no = input("ticket number must be unique. reenter, or enter 'exit' to return to main menu")
-         if ticker_no == 'exit':
-            return
+      if ticker_no == 'exit':
+         return
 
    violator_no = input("please enter violator no")
    while violator_no not in (col_violator_sin__people):
       violator_no = input("no such violator exists. please reinput violator_no or type 'exit' to return ot main menu")
-         if violator_no == 'exit':
-            return
+      if violator_no == 'exit':
+         return
 
    vehicle_id = input("please enter vehicle id")
    while vehicle_id not in col_veh_id__vehicle:
@@ -500,10 +500,6 @@ def Search3(curs): #the sql query hasn't been built yet. Will get to that eventu
          return 0
 
 
-
-
-
- 
-
+print("successful run")
 
 
