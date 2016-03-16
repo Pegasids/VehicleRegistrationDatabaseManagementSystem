@@ -38,7 +38,7 @@ def applications(curs):                                                         
                         print("Invalid input, please enter a valid key")
 
 def getVRdata(vtrows, vrows, sinrows):                                  # get data from user input and generate data in correct format
-#-------Serial Number-----------------------------------------------------------------------------------------------------------
+    #-------Serial Number-----------------------------------------------------------------------------------------------------------
     vrowlst = []    
     for vrow in vrows:
         vrowlst.append(vrow[0].strip())
@@ -48,15 +48,15 @@ def getVRdata(vtrows, vrows, sinrows):                                  # get da
     while serial_no == "" or serial_no in vrowlst:
         serial_no = input("Invalid input / Vehicle already exists in database. Serial Number? ").strip()
 
-#-------Maker-----------------------------------------------------------------------------------------------------------
+    #-------Maker-----------------------------------------------------------------------------------------------------------
     maker = input("Maker? ").strip()
     if maker == "": maker = None
 
-#-------Model-----------------------------------------------------------------------------------------------------------
+    #-------Model-----------------------------------------------------------------------------------------------------------
     model = input("Model? ").strip()
     if model == "": model = None
 
-#-------Year-----------------------------------------------------------------------------------------------------------
+    #-------Year-----------------------------------------------------------------------------------------------------------
     year = input("Year? ").strip()
     while not year.isdigit():
         if year == "": 
@@ -68,11 +68,11 @@ def getVRdata(vtrows, vrows, sinrows):                                  # get da
             break
     if year != None: int(year)
 
-#-------Color-----------------------------------------------------------------------------------------------------------
+    #-------Color-----------------------------------------------------------------------------------------------------------
     color = input("Color? ").strip()
     if color == "": color = None
 
-#-------List vehicle_type table-----------------------------------------------------------------------------------------
+    #-------List vehicle_type table-----------------------------------------------------------------------------------------
     print("")
     print("(Type ID) (Type Name)")
     type_id_lst = []
@@ -80,24 +80,24 @@ def getVRdata(vtrows, vrows, sinrows):                                  # get da
         type_id_lst.append(str(vtrow[0]))
         print(vtrow[0],". ",vtrow[1], sep='')
 
-#-------Type ID-----------------------------------------------------------------------------------------------------------  
+    #-------Type ID-----------------------------------------------------------------------------------------------------------  
     type_id = input("Type ID? ").strip()                            # has to reference type_id
     while not type_id.isdigit() or type_id not in type_id_lst:
             type_id = input("Invalid input. Type ID? ").strip()
     type_id = int(type_id)
 
-#-------Number of Owner-----------------------------------------------------------------------------------------------------------
+    #-------Number of Owner-----------------------------------------------------------------------------------------------------------
     number_of_owner = input("Number of owner? ").strip()
     while not number_of_owner.isdigit():
             number_of_owner = input("Invalid input. Number of owner? ").strip()
     number_of_owner = int(number_of_owner)
 
-#-------Enter Vehicle Infos-----------------------------------------------------------------------------------------------------------  
+    #-------Enter Vehicle Infos-----------------------------------------------------------------------------------------------------------  
     oid = []; ipo = []
     for i in range (number_of_owner):           
         print("")
 
-#---------------Owner ID---------------------------------------------------------------------------------------------------
+    #---------------Owner ID---------------------------------------------------------------------------------------------------
         sin_rowlst = [] 
         for sin in sinrows:
             sin_rowlst.append(sin[0].strip())
@@ -107,35 +107,35 @@ def getVRdata(vtrows, vrows, sinrows):                                  # get da
         while owner_id in oid or owner_id not in sin_rowlst:
             owner_id = input("Invalid input. Owner ID? ").strip()
 
-#---------------Primary Owner?---------------------------------------------------------------------------------------------------   
+    #---------------Primary Owner?---------------------------------------------------------------------------------------------------   
         is_primary_owner = input("Primary Owner?(y/n) ").strip()
         while is_primary_owner not in ['y','n','Y','N']:
             is_primary_owner = input("Invalid input. Primary Owner?(y/n) ").strip()
         is_primary_owner = is_primary_owner.lower()
 
-#------------------------------------------------------------------------------------------------------------------
+    #------------------------------------------------------------------------------------------------------------------
         oid.append(owner_id)                                # Append Owner ID
         ipo.append(is_primary_owner)                            # Append Primary?
 
-#------------------------------------------------------------------------------------------------------------------ 
+    #------------------------------------------------------------------------------------------------------------------ 
     vehicle_data = [(serial_no, maker, model, year, color, type_id)]            # generate data in correct format
     owner_data = [(oid[j], serial_no, ipo[j]) for j in range(number_of_owner)]
     #print(vehicle_data, owner_data)
     return vehicle_data, owner_data, number_of_owner
 
-#------------------------------------------------------------------------------------------------------------------
+    #------------------------------------------------------------------------------------------------------------------
 
 def project():
     
-# get username
+    # get username
     user = input("Username [%s]: " % getpass.getuser())
     if not user:
             user=getpass.getuser()
     
-# get password
+    # get password
     pw = getpass.getpass()
 
-# The URL we are connnecting to
+    # The URL we are connnecting to
     conString=''+user+'/' + pw +'@gwynne.cs.ualberta.ca:1521/CRS'
 
     try:
@@ -161,7 +161,9 @@ def project():
         print( sys.stderr, "Oracle code:", error.code)
         print( sys.stderr, "Oracle message:", error.message)
 
-#------------------------------------------New Vehicle Registration-----------------------------------------------------------
+    #------------------------------------------New Vehicle Registration-----------------------------------------------------------
+
+
 def VehicleRegistration(curs):
     # executing queries and get data
     curs.execute("SELECT * from vehicle_type")
@@ -193,7 +195,12 @@ def VehicleRegistration(curs):
                     "VALUES (:1, :2, :3)", owner_data)          
         connection.commit()
 
-#-------------------------------------------Auto Transaction----------------------------------------------------
+    
+
+
+    #-------------------------------------------Auto Transaction----------------------------------------------------
+
+
 def AutoTransaction(curs):
     # executing queries and get data
         curs.execute("SELECT * from owner")
@@ -220,6 +227,7 @@ def AutoTransaction(curs):
                 curs.setinputsizes(int, 15, 15, 15, date, float)
                 curs.executemany("INSERT INTO auto_sale(transaction_id, seller_id, buyer_id, vehicle_id, s_date, price) "
                                  "VALUES (:1, :2, :3, :4, :5, :6)", sale_data)
+
 
 def getATdata(orows, sinrows, vrows, arows):
         # --------------------- Transaction ID ---------------------
