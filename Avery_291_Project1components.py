@@ -70,6 +70,8 @@ def Create_all_the_tables(curs):
    "FOREIGN KEY (vehicle_id)  REFERENCES vehicle,"
    "FOREIGN KEY (office_no) REFERENCES people ON DELETE CASCADE)")
 
+   print("defining tables all done")
+
    connection.commit()
 
 
@@ -277,6 +279,9 @@ def Populate_the_shit(curs):
    curs.setinputsizes(int, 15, 15,15,10,10, 20,1024) #position 6 is DATE!
    surs.executemany("INSERT INTO ticket(ticket_no, violator_no, vehicle_id, office_no, vtype,vdate,place,descriptions)"
                               "VALUES(:1,:2,:3,:4,:5,:6,:7,:8)", data_ticket_table)
+
+   connection.commit()
+   print("populating database all done")
 
 
 def LicenceRegistration(curs):
@@ -500,6 +505,5 @@ def Search3(curs): #the sql query hasn't been built yet. Will get to that eventu
          return 0
 
 
-print("successful run")
 
 
