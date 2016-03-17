@@ -383,7 +383,7 @@ def LicenceRegistration(curs,connection):
 
          #curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
          insert = """insert into drive_licence (licence_no,sin,class,photo,issuing_date,expiring_date)
-                  values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"""
+                  values(:licence_no, :sin, :classs, :image,:issuing_date, :expiring_date)"""
          curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
 
       else:
@@ -472,7 +472,7 @@ def ViolationRecord(curs,connection):
 def Search1(curs,connection):
    '''
    List the name, licence_no, addr, birthday, driving class, driving_condition, 
-   and the expiring_data of a driver by entering either a licence_no or a given name. 
+   and the expiring_date of a driver by entering either a licence_no or a given name. 
    It shall display all the entries if a duplicate name is given.
 
    Issues: How do we format the result output?
