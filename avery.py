@@ -349,8 +349,7 @@ def LicenceRegistration(curs,connection):
          while licence_no in real_licence_no__drive_licence:
             licence_no = input("license number already exists, enter a unique one please")
          classs = input("please enter class")
-         photo_filename = input("please enter name of photo withe xtension")
-         photo = open(photo_filename, 'rb')
+         photo = open('sample.jpg', 'rb')
          read_photo = photo.read()
          curs.setinputsizes(read_photo=cx_Oracle.BLOB)
          issuing_date = input("please enter issuing date")
