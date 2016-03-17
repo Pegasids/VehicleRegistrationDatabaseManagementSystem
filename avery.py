@@ -30,7 +30,7 @@ def Create_all_the_tables(curs,connection):
    "PRIMARY KEY (sin), CHECK ( gender IN ('m', 'f') ))")
 
    curs.execute("create table drive_licence "
-   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo CHAR(10),"
+   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo BLOB,"
    "issuing_date DATE, expiring_date DATE,"
    "PRIMARY KEY (licence_no), UNIQUE (sin), FOREIGN KEY (sin) REFERENCES people ON DELETE CASCADE)")   
 
@@ -349,14 +349,15 @@ def LicenceRegistration(curs,connection):
          while licence_no in real_licence_no__drive_licence:
             licence_no = input("license number already exists, enter a unique one please")
          classs = input("please enter class")
-         photo = open('sample.jpg', 'rb')
+         photo_filename = input("please enter name of photo withe xtension")
+         photo = open(photo_filename, 'rb')
          read_photo = photo.read()
          curs.setinputsizes(read_photo=cx_Oracle.BLOB)
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
-         confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+         confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,read_photo,issuing_date,expiring_date))
          if confirm == 'y':
-            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
+            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
          else: 
             return
 
@@ -376,9 +377,9 @@ def LicenceRegistration(curs,connection):
       curs.setinputsizes(read_photo=cx_Oracle.BLOB)      
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
-      confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+      confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,read_photo,issuing_date,expiring_date))
       if confirm =='y':
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
       else:
          return
    connection.commit()
