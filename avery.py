@@ -381,10 +381,10 @@ def LicenceRegistration(curs,connection):
       if confirm =='y':
          print("About to enter")
 
-         #curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
-         insert = """insert into drive_licence (licence_no,sin,class,photo,issuing_date,expiring_date)
-                  values(:licence_no, :sin, :classs, :image,:issuing_date, :expiring_date)"""
-         curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
+         #insert = """insert into drive_licence (licence_no,sin,class,photo,issuing_date,expiring_date)
+          #        values(:licence_no, :sin, :classs, :image,:issuing_date, :expiring_date)"""
+         #curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
 
       else:
          return
