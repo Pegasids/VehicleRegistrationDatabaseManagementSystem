@@ -76,8 +76,8 @@ def project():
         # create a cursor 
         curs = connection.cursor()
         Create_all_the_tables(curs,connection)
-        #Populate_the_shit(curs,connection)
         # Prompt/Start the appliation programs
+        #Populate_the_shit(curs,connection)
         applications(curs,connection)
 
         #----------------------------------------------------------------------------------------------------------------------------
