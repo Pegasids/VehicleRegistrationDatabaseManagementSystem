@@ -477,9 +477,22 @@ def Search1(curs,connection):
 
    search_input = input("enter search term please")
 
-   if (search_input in real_s1_col_pname) or (search_input in real_s1_col_dllicence):
+   if (search_input in real_s1_col_pname):
       print(search_input)
       execution = ("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dc.description, dl.expiring_date FROM people p, drive_licence dl, drive_condition dc, restriction r WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id AND p.name ="+"'"+search_input+"'")
+      print(execution)
+      print(type(execution))
+      curs.execute(execution)
+      print("YES")
+      s1_result = curs.fetchall()
+      print("search is  ", s1_result)
+      for r in s1_result:
+         print (r)
+         print("PASS!")
+
+   elif (search_input in real_s1_col_dllicence):
+      print(search_input)
+      execution = ("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dc.description, dl.expiring_date FROM people p, drive_licence dl, drive_condition dc, restriction r WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id AND dl.licence_no ="+"'"+search_input+"'")
       print(execution)
       print(type(execution))
       curs.execute(execution)
@@ -520,12 +533,20 @@ def Search2(curs,connection):
 
    search_input = input("enter sin number or licence number please")
 
-   if (search_input in real_s2_col_psin) or (search_input in real_s2_col_dllicence):
+   if (search_input in real_s2_col_psin):
       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
       for r in s2_result:
          print(r)
+
+   elif  (search_input in real_s2_col_dllicence):
+      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and dl.licence_no = '{}'".format(search_input)
+      curs.execute(execution )
+      s2_result = curs.fetchall()
+      for r in s2_result:
+         print(r)
+
 
    else:
       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
