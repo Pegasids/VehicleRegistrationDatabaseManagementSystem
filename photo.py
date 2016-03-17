@@ -32,7 +32,7 @@ place="Utah"
 #(Assumes a file by this name exists in the directory you are running from)
 f_image  = open('sample.jpg','rb')
 image  = f_image.read()
-
+print (image)
 # prepare memory for operation parameters
 cursor.setinputsizes(image=cx_Oracle.BLOB)
  
@@ -40,6 +40,7 @@ insert = """insert into pictures (photo_id, title, place, image)
    values (:photo_id, :title, :place, :image)"""
 cursor.execute(insert,{'photo_id':pid, 'title':title,
                            'place':place, 'image':image})
+
 connection.commit()
 
 print("image added")

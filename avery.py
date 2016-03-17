@@ -389,6 +389,16 @@ def LicenceRegistration(curs,connection):
          return
    connection.commit()
 
+def testingphoto(curs,connection):
+   photo = open('sample.jpg', 'rb')
+   image = photo.read()
+   curs.setinputsizes(image=cx_Oracle.BLOB)
+   curs.execute("insert into drive_licence values('101', '111111111111111', 'a',")
+
+
+
+
+
 
 def ViolationRecord(curs,connection):
    '''
