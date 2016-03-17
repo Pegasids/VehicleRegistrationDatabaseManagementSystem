@@ -373,14 +373,14 @@ def LicenceRegistration(curs,connection):
          licence_no = input("license must be unique! please reenter")
       classs = input("please enter class")
       photo = open('sample.jpg', 'rb')
-      read_photo = photo.read()
-      curs.setinputsizes(read_photo=cx_Oracle.BLOB)      
+      image = photo.read()
+      curs.setinputsizes(image=cx_Oracle.BLOB)      
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
       confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
       if confirm =='y':
          print("About to enter")
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
       else:
          return
    connection.commit()
