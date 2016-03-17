@@ -356,7 +356,7 @@ def LicenceRegistration(curs,connection):
          expiring_date = input("please enter expry date")
          confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
          if confirm == 'y':
-            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
          else: 
             return
 
@@ -376,9 +376,9 @@ def LicenceRegistration(curs,connection):
       curs.setinputsizes(read_photo=cx_Oracle.BLOB)      
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
-      confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,read_photo,issuing_date,expiring_date))
+      confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
       if confirm =='y':
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
       else:
          return
    connection.commit()
