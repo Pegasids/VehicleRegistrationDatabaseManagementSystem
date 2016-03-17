@@ -346,12 +346,14 @@ def LicenceRegistration(curs,connection):
          while licence_no in real_licence_no__drive_licence:
             licence_no = input("license number already exists, enter a unique one please")
          classs = input("please enter class")
-         photo = input("please enter photo")
+         photo = open('sample.jpg', 'rb')
+         read_photo = photo.read()
+         curs.setinputsizes(read_photo=cx_Oracle.BLOB)
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
          confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
          if confirm == 'y':
-            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
          else: 
             return
 
@@ -366,12 +368,14 @@ def LicenceRegistration(curs,connection):
       while licence_no in real_licence_no__drive_licence:
          licence_no = input("license must be unique! please reenter")
       classs = input("please enter class")
-      photo = input("please enter photo name with extension")
+      photo = open('sample.jpg', 'rb')
+      read_photo = photo.read()
+      curs.setinputsizes(read_photo=cx_Oracle.BLOB)      
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
       confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
       if confirm =='y':
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
       else:
          return
    connection.commit()
