@@ -41,6 +41,12 @@ insert = """insert into pictures (photo_id, title, place, image)
 cursor.execute(insert,{'photo_id':pid, 'title':title,
                            'place':place, 'image':image})
 connection.commit()
+
+print("image added")
+execution = ("select image from pictures")
+cursor.execute(execution)
+image_list = cursor.fetchall()
+print(image_list)
 # Housekeeping...
 f_image.close()
 cursor.close()
