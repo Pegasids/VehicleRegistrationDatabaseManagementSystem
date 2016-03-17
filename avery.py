@@ -315,7 +315,6 @@ def LicenceRegistration(curs,connection):
    for i in licence_no__drive_licence:
       real_licence_no__drive_licence.add(i[0].strip())
 
-   print(real_licence_no__drive_licence)
 
 
    sin = input("please enter sin number")
@@ -403,7 +402,6 @@ def ViolationRecord(curs,connection):
    col_sin__people = set(curs.fetchall())
    real_col_sin__people = set()
    for i in col_sin__people:
-      print(type(i))
       real_col_sin__people.add(i[0].strip())
 
 
