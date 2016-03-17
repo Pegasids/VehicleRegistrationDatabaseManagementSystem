@@ -52,7 +52,7 @@ def SearchEngine(curs, connection):
         elif key =='3':
             print('')
             Search3(curs,connection)
-        elif key =='testphoto':
+        elif key =='t':
             testingphoto(curs,connection)
         else:
             applications(curs,connection)
