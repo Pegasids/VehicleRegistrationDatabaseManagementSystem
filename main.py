@@ -43,6 +43,7 @@ def SearchEngine(curs, connection):
         print("| press any other key to exit |")
         print("")
         key = input("selection please:  ")
+        print(key)
         if key == '1':
             print('')
             Search1(curs,connection)
