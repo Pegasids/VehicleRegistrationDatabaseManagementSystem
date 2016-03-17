@@ -403,8 +403,10 @@ def ViolationRecord(curs,connection):
    col_sin__people = set(curs.fetchall())
    real_col_sin__people = set()
    for i in col_sin__people:
+      print(type(i))
       real_col_sin__people.add(i[0].strip())
-   print(type(real_col_sin__people[0]))
+
+
 
    curs.execute("SELECT serial_no from vehicle")
    col_veh_id__vehicle = set(curs.fetchall())
