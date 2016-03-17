@@ -380,6 +380,7 @@ def LicenceRegistration(curs,connection):
       confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
       if confirm =='y':
          read_photo=""
+         print("About to enter")
          curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
       else:
          return
