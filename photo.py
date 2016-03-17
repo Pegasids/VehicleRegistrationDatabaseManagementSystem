@@ -23,7 +23,7 @@ conString=''+user+'/' + pw +'@gwynne.cs.ualberta.ca:1521/CRS'
 connection = cx_Oracle.connect(conString) 
 cursor = connection.cursor()
 
-curs.execute("create table pictures (photo_id integer, title varchar(10), place varchar(10), image blob, primary key (photo_id) )")
+cursor.execute("create table pictures (photo_id integer, title varchar(10), place varchar(10), image blob, primary key (photo_id) )")
 # information for the new row
 pid=101
 title="Window"
