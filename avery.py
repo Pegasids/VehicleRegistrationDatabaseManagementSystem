@@ -112,23 +112,23 @@ def Populate_the_shit(curs,connection):
    ####################################################################################################################################################################
 
 
-   data_drivelicencetable =  [('100000000000001', '111111111111111','A', '0x12', '01-JAN-2013', '01-JAN-2018'),
-                              ('100000000000002', '111111111111112', 'A', 'PHOTO', '02-JAN-2010', '02-FEB-2015'),
-                              ('100000000000003', '111111111111113', 'A', 'PHOTO', '03-JAN-2015', '03-JAN-2020'),
-                              ('100000000000004', '111111111111114', 'B', "PHOTO", '12-FEB-2014', '12-FEB-2019'),
-                              ('100000000000005', '111111111111115', 'A', 'PHOTO', '15-FEB-2013', '15-OCT-2018'),
-                              ('100000000000006', '111111111111116', 'A', 'PHOTO', '13-SEP-2012', '13-DEC-2017'),
-                              ('100000000000007', '111111111111117', 'C', 'PHOTO', '03-MAY-2015', '03-JAN-2020'),
-                              ('100000000000008', '111111111111118', 'A', 'PHOTO', '03-JAN-2013', '03-JAN-2018'),
-                              ('100000000000009', '111111111111119', 'B', 'PHOTO', '02-JAN-2012', '02-JAN-2017'), 
-                              ('100000000000010', '111111111111120', 'D', 'PHOTO', '01-JAN-2010', '01-JAN-2015'),
-                              ('100000000000011', '111111111111121', 'A', 'PHOTO', '04-JUN-2013', '04-SEP-2018'),
-                              ('100000000000012', '111111111111122', 'A', 'PHOTO', '06-JUL-2016', '06-DEC-2021'),
-                              ('100000000000013', '111111111111123', 'B', 'PHOTO', '07-DEC-2015', '07-OCT-2020'), 
-                              ('100000000000014', '111111111111124', 'A', 'PHOTO', '08-SEP-2014', '08-JAN-2019'),
-                              ('100000000000015', '111111111111125', 'D', '0x43', '08-OCT-2012', '08-JAN-2017')]
+   data_drivelicencetable =  [('100000000000001', '111111111111111','A', '', '01-JAN-2013', '01-JAN-2018'),
+                              ('100000000000002', '111111111111112', 'A', '', '02-JAN-2010', '02-FEB-2015'),
+                              ('100000000000003', '111111111111113', 'A', '', '03-JAN-2015', '03-JAN-2020'),
+                              ('100000000000004', '111111111111114', 'B', "", '12-FEB-2014', '12-FEB-2019'),
+                              ('100000000000005', '111111111111115', 'A', '', '15-FEB-2013', '15-OCT-2018'),
+                              ('100000000000006', '111111111111116', 'A', '', '13-SEP-2012', '13-DEC-2017'),
+                              ('100000000000007', '111111111111117', 'C', '', '03-MAY-2015', '03-JAN-2020'),
+                              ('100000000000008', '111111111111118', 'A', '', '03-JAN-2013', '03-JAN-2018'),
+                              ('100000000000009', '111111111111119', 'B', '', '02-JAN-2012', '02-JAN-2017'), 
+                              ('100000000000010', '111111111111120', 'D', '', '01-JAN-2010', '01-JAN-2015'),
+                              ('100000000000011', '111111111111121', 'A', '', '04-JUN-2013', '04-SEP-2018'),
+                              ('100000000000012', '111111111111122', 'A', '', '06-JUL-2016', '06-DEC-2021'),
+                              ('100000000000013', '111111111111123', 'B', '', '07-DEC-2015', '07-OCT-2020'), 
+                              ('100000000000014', '111111111111124', 'A', '', '08-SEP-2014', '08-JAN-2019'),
+                              ('100000000000015', '111111111111125', 'D', '', '08-OCT-2012', '08-JAN-2017')]
    curs.bindarraysize = 2
-   curs.setinputsizes(15, 15, 10, 10, 10,10) #position 3 is BLOB!! position  position 4 and 5 is DATE!!
+   curs.setinputsizes(15, 15, 10, 1024, 10,10) #position 3 is BLOB!! position  position 4 and 5 is DATE!!
    curs.executemany("INSERT INTO drive_licence(licence_no,sin,class,photo,issuing_date, expiring_date) "
                                  "VALUES (:1, :2, :3, :4, :5, :6)", data_drivelicencetable)
 
@@ -354,7 +354,7 @@ def LicenceRegistration(curs,connection):
          curs.setinputsizes(read_photo=cx_Oracle.BLOB)
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
-         confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,read_photo,issuing_date,expiring_date))
+         confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
          if confirm == 'y':
             curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
          else: 
