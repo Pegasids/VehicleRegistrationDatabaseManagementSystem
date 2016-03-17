@@ -302,12 +302,16 @@ def LicenceRegistration(curs,connection):
    exit_flag = False
    curs.execute("SELECT sin from people")
    real_col = set()
+
    list_sin_from_people_table = set(curs.fetchall())
+
    for i in list_sin_from_people_table:
       real_col.add(i[0].strip())
+
    curs.execute("SELECT licence_no from drive_licence")
    licence_no__drive_licence = set(curs.fetchall())
    real_licence_no__drive_licence = set()
+
    for i in licence_no__drive_licence:
       real_licence_no__drive_licence.add(i[0].strip())
 
@@ -400,7 +404,7 @@ def ViolationRecord(curs,connection):
    real_col_sin__people = set()
    for i in col_sin__people:
       real_col_sin__people.add(i[0].strip())
-
+   print(type(real_col_sin__people[0]))
 
    curs.execute("SELECT serial_no from vehicle")
    col_veh_id__vehicle = set(curs.fetchall())
