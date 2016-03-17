@@ -393,8 +393,17 @@ def testingphoto(curs,connection):
    photo = open('sample.jpg', 'rb')
    image = photo.read()
    curs.setinputsizes(image=cx_Oracle.BLOB)
-   curs.execute("insert into drive_licence values('101', '111111111111111', 'a',")
+   
+   licence_no = '20000'
+   sin = "111111111111111"
+   classs = 'a'
+   issuing_date = '02-FEB-1999'
+   expiring_date = '03-MAY-2010'
 
+   insert = "insert into drive_licence values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"
+   curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
+
+   connection.commit()
 
 
 
