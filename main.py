@@ -52,6 +52,8 @@ def SearchEngine(curs, connection):
         elif key =='3':
             print('')
             Search3(curs,connection)
+        elif key =='testphoto':
+            testingphoto(curs,connection)
         else:
             applications(curs,connection)
 
@@ -77,7 +79,6 @@ def project():
         curs = connection.cursor()
         Create_all_the_tables(curs,connection)
         Populate_the_shit(curs,connection)
-        testingphoto(curs,connection)
 
         # Prompt/Start the appliation programs
         applications(curs,connection)
