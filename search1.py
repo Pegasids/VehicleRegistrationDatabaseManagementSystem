@@ -1,4 +1,4 @@
-def Search1(curs):
+def Search1(curs,connection):
    '''
    List the name, licence_no, addr, birthday, driving class, driving_condition, 
    and the expiring_data of a driver by entering either a licence_no or a given name. 
