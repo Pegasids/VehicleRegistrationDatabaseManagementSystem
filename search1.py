@@ -28,7 +28,7 @@ def Search1(curs, connection):
       elif search_input in licencelist:
          curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') "
                 "from people p, drive_licence dl, driving_condition dc, restriction dr " +
-                "where dl.sin = p.sin and dl.licence_no = '" + search_input + "' and dr.licence_no = '" + search_input + "' and dr.r_id = dc.c_id")
+                "where dl.sin = p.sin and dl.licence_no = '" + search_input +  "' and dr.r_id = dc.c_id")
          output = curs.fetchall()
          print(output)
          for row in output:
