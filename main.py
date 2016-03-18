@@ -1,16 +1,18 @@
 import sys
 import cx_Oracle # the package used for accessing Oracle in Python
 import getpass # the package for getting password from user without displaying it
-from addperson_nathan import *
-from auto_transaction_nathan import *
-from avery import*
+#our different modules
+from addperson import *
+from Auto_Transaction import *
+from utilities import*
 from search3 import *
-from getting_the_damn_photo import*
-from vehicle_registration_canopus import *
+from Violation_Record import*
+from Licence_Registration import*
+from Vehicle_Registration import *
 from search1 import*
 from search2 import*
 
-
+#our main application menu
 def applications(curs,connection):                                                                        # starts application programs
     exit_code = False
     while exit_code == False:
@@ -45,6 +47,7 @@ def applications(curs,connection):                                              
             print("Invalid input, please enter a valid key")
 
 
+#our search engine menu
 def SearchEngine(curs, connection):
     while True:
         print("")
@@ -68,8 +71,8 @@ def SearchEngine(curs, connection):
             applications(curs,connection)
 
 
+#this function establishes the connection and then starts up our main menu
 def project():
-    
     # get username
     user = input("Username [%s]: " % getpass.getuser())
     if not user:
@@ -88,7 +91,7 @@ def project():
         # create a cursor 
         curs = connection.cursor()
         Create_all_the_tables(curs,connection)
-        Populate_the_shit(curs,connection)
+        #Populate_the_shit(curs,connection)
 
         # Prompt/Start the appliation programs
         applications(curs,connection)
