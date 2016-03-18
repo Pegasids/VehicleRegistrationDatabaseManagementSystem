@@ -61,7 +61,7 @@ def getATdata(orows, sinrows, vrows, arows, curs):
 	bsequal = True
 	plist = []
 	olist = []
-	sin_data = []
+	real_sin = []
 	for row in orows:
 		olist.append(row[0].strip())
 	for row in sinrows:
