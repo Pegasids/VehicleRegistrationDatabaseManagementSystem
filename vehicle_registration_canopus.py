@@ -181,7 +181,7 @@ def nvr_getdata(vtrows, vrows, sinrows):									# get data from user input and 
 
 
 
-def new_vehicle_reg(curs,connection):
+def VehicleRegistration(curs,connection):
 	
 		
 		#-------------------------------New Vehicle Registration---------------------------------------------------------------------
