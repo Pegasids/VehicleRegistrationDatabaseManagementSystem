@@ -9,8 +9,7 @@ from Search_Functions import *
 from Violation_Record import*
 from Licence_Registration import*
 from Vehicle_Registration import *
-from search2 import*
-from search3 import*
+
 
 
 #our main application menu
