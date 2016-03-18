@@ -433,7 +433,7 @@ def ViolationRecord(curs,connection):
    elif primary_or_generic =='yes':
       execution = "select owner_id from owner where is_primary_owner = 'y' and vehicle_id = {}".format(vehicle_id)
       curs.execute(execution)
-      primary_ownerresult = curs.fetchall
+      primary_ownerresult = curs.fetchall()
       real_primary_owner_result=set()
       print(primary_ownerresult)
       return
