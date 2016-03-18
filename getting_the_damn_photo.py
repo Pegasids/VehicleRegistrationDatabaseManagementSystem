@@ -60,7 +60,14 @@ def LicenceRegistration(curs,connection):
          expiring_date = input("please enter expry date")
          confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
          if confirm == 'y':
-            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+
+            f_image = open(photo, 'rb')
+            image = f_image.read()
+
+            insert = """insert into drive_licence(licence_no, sin, class, photo,issuing_date, expiring_date)
+               values (:licence_no, :sin, :class, :photo, TO_DATE(:issuing_date,'YYYY-MM-DD'), TO_DATE(:expiring_date,'YYYY-MM-DD'))"""
+            curs.execute(insert,{'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo':image, 'issuing_date':issuing_date, 'expiring_date':expiring_date})      
+            f_image.close()
          else: 
             return
 
@@ -80,7 +87,14 @@ def LicenceRegistration(curs,connection):
       expiring_date = input("please enter expry date")
       confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
       if confirm =='y':
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+
+         f_image = open(photo, 'rb')
+         image = f_image.read()
+
+         insert = """insert into drive_licence(licence_no, sin, class, photo,issuing_date, expiring_date)
+               values (:licence_no, :sin, :class, :photo, TO_DATE(:issuing_date,'YYYY-MM-DD'), TO_DATE(:expiring_date,'YYYY-MM-DD'))"""
+         curs.execute(insert,{'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo':image, 'issuing_date':issuing_date, 'expiring_date':expiring_date})      
+         f_image.close()
       else:
          return
    connection.commit()

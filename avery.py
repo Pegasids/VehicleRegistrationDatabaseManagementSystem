@@ -30,7 +30,7 @@ def Create_all_the_tables(curs,connection):
    "PRIMARY KEY (sin), CHECK ( gender IN ('m', 'f') ))")
 
    curs.execute("create table drive_licence "
-   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo CHAR(10),"
+   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo BLOB,"
    "issuing_date DATE, expiring_date DATE,"
    "PRIMARY KEY (licence_no), UNIQUE (sin), FOREIGN KEY (sin) REFERENCES people ON DELETE CASCADE)")   
 
