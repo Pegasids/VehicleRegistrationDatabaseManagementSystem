@@ -392,7 +392,6 @@ def LicenceRegistration(curs,connection):
 def testingphoto(curs,connection):
    f_image = open('sample.jpg', 'rb')
    image= f_image.read()
-   curs.setinputsizes(image = cx_Oracle.BLOB)
    #curs.setinputsizes(image=cx_Oracle.BLOB)
    print(image)
    a = '2003000'
