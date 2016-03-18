@@ -476,7 +476,7 @@ def Search1(curs,connection):
 
    search_input = input("enter search term please")
 
-   if (search_input in real_s1_col_pname) or (search_input in real_s1_col_dllicence):
+   if (search_input in real_s1_col_pname):
       print(search_input)
       execution = ("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dc.description, dl.expiring_date FROM people p, drive_licence dl, drive_condition dc, restriction r WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id AND p.name ="+"'"+search_input+"'")
       print(execution)
@@ -488,6 +488,8 @@ def Search1(curs,connection):
       for r in s1_result:
          print (r)
          print("PASS!")
+   elif (search_input in real_s1_col_dllicence):
+      
 
    else:
       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
