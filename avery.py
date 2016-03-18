@@ -3,7 +3,7 @@ this contains 4 functions which should be functional if copied and pasted into t
 Populate_the_shit(curs) is the only function which is still not yet defined. 
 Hoping to work on this and have this up soemtime tomorrow or the day after - Avery
 """
-#line 28 photo is char cause I can't figure it out
+
 
 import sys
 import cx_Oracle
@@ -30,7 +30,7 @@ def Create_all_the_tables(curs,connection):
    "PRIMARY KEY (sin), CHECK ( gender IN ('m', 'f') ))")
 
    curs.execute("create table drive_licence "
-   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo CHAR(20),"
+   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo CHAR(10),"
    "issuing_date DATE, expiring_date DATE,"
    "PRIMARY KEY (licence_no), UNIQUE (sin), FOREIGN KEY (sin) REFERENCES people ON DELETE CASCADE)")   
 
@@ -112,23 +112,23 @@ def Populate_the_shit(curs,connection):
    ####################################################################################################################################################################
 
 
-   data_drivelicencetable =  [('100000000000001', '111111111111111','A', '', '01-JAN-2013', '01-JAN-2018'),
-                              ('100000000000002', '111111111111112', 'A', '', '02-JAN-2010', '02-FEB-2015'),
-                              ('100000000000003', '111111111111113', 'A', '', '03-JAN-2015', '03-JAN-2020'),
-                              ('100000000000004', '111111111111114', 'B', "", '12-FEB-2014', '12-FEB-2019'),
-                              ('100000000000005', '111111111111115', 'A', '', '15-FEB-2013', '15-OCT-2018'),
-                              ('100000000000006', '111111111111116', 'A', '', '13-SEP-2012', '13-DEC-2017'),
-                              ('100000000000007', '111111111111117', 'C', '', '03-MAY-2015', '03-JAN-2020'),
-                              ('100000000000008', '111111111111118', 'A', '', '03-JAN-2013', '03-JAN-2018'),
-                              ('100000000000009', '111111111111119', 'B', '', '02-JAN-2012', '02-JAN-2017'), 
-                              ('100000000000010', '111111111111120', 'D', '', '01-JAN-2010', '01-JAN-2015'),
-                              ('100000000000011', '111111111111121', 'A', '', '04-JUN-2013', '04-SEP-2018'),
-                              ('100000000000012', '111111111111122', 'A', '', '06-JUL-2016', '06-DEC-2021'),
-                              ('100000000000013', '111111111111123', 'B', '', '07-DEC-2015', '07-OCT-2020'), 
-                              ('100000000000014', '111111111111124', 'A', '', '08-SEP-2014', '08-JAN-2019'),
-                              ('100000000000015', '111111111111125', 'D', '', '08-OCT-2012', '08-JAN-2017')]
+   data_drivelicencetable =  [('100000000000001', '111111111111111','A', '0x12', '01-JAN-2013', '01-JAN-2018'),
+                              ('100000000000002', '111111111111112', 'A', 'PHOTO', '02-JAN-2010', '02-FEB-2015'),
+                              ('100000000000003', '111111111111113', 'A', 'PHOTO', '03-JAN-2015', '03-JAN-2020'),
+                              ('100000000000004', '111111111111114', 'B', "PHOTO", '12-FEB-2014', '12-FEB-2019'),
+                              ('100000000000005', '111111111111115', 'A', 'PHOTO', '15-FEB-2013', '15-OCT-2018'),
+                              ('100000000000006', '111111111111116', 'A', 'PHOTO', '13-SEP-2012', '13-DEC-2017'),
+                              ('100000000000007', '111111111111117', 'C', 'PHOTO', '03-MAY-2015', '03-JAN-2020'),
+                              ('100000000000008', '111111111111118', 'A', 'PHOTO', '03-JAN-2013', '03-JAN-2018'),
+                              ('100000000000009', '111111111111119', 'B', 'PHOTO', '02-JAN-2012', '02-JAN-2017'), 
+                              ('100000000000010', '111111111111120', 'D', 'PHOTO', '01-JAN-2010', '01-JAN-2015'),
+                              ('100000000000011', '111111111111121', 'A', 'PHOTO', '04-JUN-2013', '04-SEP-2018'),
+                              ('100000000000012', '111111111111122', 'A', 'PHOTO', '06-JUL-2016', '06-DEC-2021'),
+                              ('100000000000013', '111111111111123', 'B', 'PHOTO', '07-DEC-2015', '07-OCT-2020'), 
+                              ('100000000000014', '111111111111124', 'A', 'PHOTO', '08-SEP-2014', '08-JAN-2019'),
+                              ('100000000000015', '111111111111125', 'D', '0x43', '08-OCT-2012', '08-JAN-2017')]
    curs.bindarraysize = 2
-   curs.setinputsizes(15, 15, 10, 1024, 10,10) #position 3 is BLOB!! position  position 4 and 5 is DATE!!
+   curs.setinputsizes(15, 15, 10, 10, 10,10) #position 3 is BLOB!! position  position 4 and 5 is DATE!!
    curs.executemany("INSERT INTO drive_licence(licence_no,sin,class,photo,issuing_date, expiring_date) "
                                  "VALUES (:1, :2, :3, :4, :5, :6)", data_drivelicencetable)
 
@@ -302,19 +302,16 @@ def LicenceRegistration(curs,connection):
    exit_flag = False
    curs.execute("SELECT sin from people")
    real_col = set()
-
    list_sin_from_people_table = set(curs.fetchall())
-
    for i in list_sin_from_people_table:
       real_col.add(i[0].strip())
-
    curs.execute("SELECT licence_no from drive_licence")
    licence_no__drive_licence = set(curs.fetchall())
    real_licence_no__drive_licence = set()
-
    for i in licence_no__drive_licence:
       real_licence_no__drive_licence.add(i[0].strip())
 
+   print(real_licence_no__drive_licence)
 
 
    sin = input("please enter sin number")
@@ -349,16 +346,12 @@ def LicenceRegistration(curs,connection):
          while licence_no in real_licence_no__drive_licence:
             licence_no = input("license number already exists, enter a unique one please")
          classs = input("please enter class")
-         photo = open('sample.jpg', 'rb')
-         read_photo = photo.read()
-         read_photo = input("photo name")
-         curs.setinputsizes(read_photo=cx_Oracle.BLOB)
+         photo = input("please enter photo")
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
-         confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
+         confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
          if confirm == 'y':
-            read_photo=""
-            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,read_photo,issuing_date,expiring_date)))
+            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
          else: 
             return
 
@@ -373,27 +366,15 @@ def LicenceRegistration(curs,connection):
       while licence_no in real_licence_no__drive_licence:
          licence_no = input("license must be unique! please reenter")
       classs = input("please enter class")
-      photo = open('sample.jpg', 'rb')
-      image = input("name of image with extension")
-      
-      curs.setinputsizes(image_1=cx_Oracle.BLOB)      
+      photo = input("please enter photo name with extension")
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
-      confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
+      confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
       if confirm =='y':
-         print("About to enter")
-
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
-         #insert = "insert into drive_licence values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"
-         #curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image_1, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
-
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
       else:
          return
    connection.commit()
-
-
-
-
 
 
 def ViolationRecord(curs,connection):
@@ -415,7 +396,6 @@ def ViolationRecord(curs,connection):
    real_col_sin__people = set()
    for i in col_sin__people:
       real_col_sin__people.add(i[0].strip())
-
 
 
    curs.execute("SELECT serial_no from vehicle")
@@ -477,7 +457,7 @@ def ViolationRecord(curs,connection):
 def Search1(curs,connection):
    '''
    List the name, licence_no, addr, birthday, driving class, driving_condition, 
-   and the expiring_date of a driver by entering either a licence_no or a given name. 
+   and the expiring_data of a driver by entering either a licence_no or a given name. 
    It shall display all the entries if a duplicate name is given.
 
    Issues: How do we format the result output?
@@ -497,22 +477,9 @@ def Search1(curs,connection):
 
    search_input = input("enter search term please")
 
-   if (search_input in real_s1_col_pname):
+   if (search_input in real_s1_col_pname) or (search_input in real_s1_col_dllicence):
       print(search_input)
       execution = ("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dc.description, dl.expiring_date FROM people p, drive_licence dl, drive_condition dc, restriction r WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id AND p.name ="+"'"+search_input+"'")
-      print(execution)
-      print(type(execution))
-      curs.execute(execution)
-      print("YES")
-      s1_result = curs.fetchall()
-      print("search is  ", s1_result)
-      for r in s1_result:
-         print (r)
-         print("PASS!")
-
-   elif (search_input in real_s1_col_dllicence):
-      print(search_input)
-      execution = ("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dc.description, dl.expiring_date FROM people p, drive_licence dl, drive_condition dc, restriction r WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id AND dl.licence_no ="+"'"+search_input+"'")
       print(execution)
       print(type(execution))
       curs.execute(execution)
@@ -553,20 +520,12 @@ def Search2(curs,connection):
 
    search_input = input("enter sin number or licence number please")
 
-   if (search_input in real_s2_col_psin):
+   if (search_input in real_s2_col_psin) or (search_input in real_s2_col_dllicence):
       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
       for r in s2_result:
          print(r)
-
-   elif  (search_input in real_s2_col_dllicence):
-      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and dl.licence_no = '{}'".format(search_input)
-      curs.execute(execution )
-      s2_result = curs.fetchall()
-      for r in s2_result:
-         print(r)
-
 
    else:
       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
@@ -595,5 +554,4 @@ def Search3(curs,connection): #the sql query hasn't been built yet. Will get to 
          Search3(curs)
       elif redo_or_exit == 'exit':
          return 0
-
 
