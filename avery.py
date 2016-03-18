@@ -395,8 +395,8 @@ def testingphoto(curs,connection):
 
    #curs.setinputsizes(image=cx_Oracle.BLOB)
    print(image)
-   a = '200300'
-   b = "111111111111115"
+   a = '2003000'
+   b = "111111111111111"
    c = 'a'
    idd = ''
    ed = ''
