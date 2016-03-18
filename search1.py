@@ -20,6 +20,7 @@ def Search1(curs,connection):
    ask = input("Do you want to enter a licence number or a name? (1/2)\n")
    while ask in ['1', '2']:
       if ask == '1':
+          search_input = input("enter search term")
           if search_input in licencelist:
               curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') "
                     "from people p, drive_licence dl, driving_condition dc, restriction dr " +
@@ -39,6 +40,7 @@ def Search1(curs,connection):
               print("Expiring Date: " + display[6])
 
       elif ask == '2':
+          search_input = input("input search term")
           if search_input in namelist:
               curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') " +
                     "from people p, drive_licence dl, driving_condition dc, restriction dr " +
