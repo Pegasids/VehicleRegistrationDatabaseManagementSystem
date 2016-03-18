@@ -435,8 +435,8 @@ def ViolationRecord(curs,connection):
       curs.execute(execution)
       primary_ownerresult = curs.fetchall
       real_primary_owner_result=set()
-      for i in primary_ownerresult:
-         vehicle_id = i[0].strip
+      print(primary_ownerresult)
+      return
 
 
 
