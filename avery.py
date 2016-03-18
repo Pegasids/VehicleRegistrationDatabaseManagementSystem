@@ -32,7 +32,7 @@ def Create_all_the_tables(curs,connection):
    curs.execute("create table drive_licence "
    "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo BLOB,"
    "issuing_date DATE, expiring_date DATE,"
-   "PRIMARY KEY (licence_no), UNIQUE (sin), FOREIGN KEY (sin) REFERENCES people ON DELETE CASCADE)")   
+   "PRIMARY KEY (licence_no), UNIQUE (sin) )")   
 
    curs.execute("create table drive_condition "
    "(c_id INTEGER, description VARCHAR(1024),"
