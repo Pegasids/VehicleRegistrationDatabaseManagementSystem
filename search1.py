@@ -44,7 +44,7 @@ def Search1(curs,connection):
           if search_input in namelist:
               print("hi")
               curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') " +
-                    "from people p, drive_licence dl, drive_condition dc, restriction dr " +
+                    "from people p, drive_licence dl, driving_condition dc, restriction dr " +
                     "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
               print("hi2")
               output = curs.fetchall()

@@ -30,3 +30,5 @@ def Search3(curs,connection): #the sql query hasn't been built yet. Will get to 
 	v_history = curs.fetchall()
 	for v_history_row in v_history:
 		print(v_history_row)
+
+
