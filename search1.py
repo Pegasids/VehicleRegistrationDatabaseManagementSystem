@@ -26,53 +26,53 @@ def Search1(curs, connection):
       if search_input == "":
           print("Invalid Input. Input a new search term: ")
       elif search_input in licencelist:
-          curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') "
+         curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') "
                 "from people p, drive_licence dl, driving_condition dc, restriction dr " +
                 "where dl.sin = p.sin and dl.licence_no = '" + search_input + "' and dr.licence_no = '" + search_input + "' and dr.r_id = dc.c_id")
-          output = curs.fetchall()
-          for row in output:
-              print("\n")
-              display = []
-              for i in row:
-                  display.append(i.strip())
-              print("Driver Name: " + display[0])
-              print("Licence Number: " + display[1])
-              print("Address: " + display[2])
-              print("Birthday: " + display[3])
-              print("Driving Class: " + display[4])
-              print("Driving Condition: " + display[5])
-              print("Expiring Date: " + display[6])
+         output = curs.fetchall()
+         for row in output:
+            print("\n")
+            display = []
+            for i in row:
+               display.append(i.strip())
+            print("Driver Name: " + display[0])
+            print("Licence Number: " + display[1])
+            print("Address: " + display[2])
+            print("Birthday: " + display[3])
+            print("Driving Class: " + display[4])
+            print("Driving Condition: " + display[5])
+            print("Expiring Date: " + display[6])
       else:
-          redo = input("No results found. Redo search or exit to search menu? Redo/Exit")
-          if redo == 'redo':
-              Search1(curs, connection)
-          else:
-              return
+         redo = input("No results found. Redo search or exit to search menu? Redo/Exit")
+         if redo == 'redo':
+            Search1(curs, connection)
+         else:
+            return
    else:
       search_input = input("Input search term: ")
       if search_input == "":
-          print("Invalid Input. Input a new search term: ")
+         print("Invalid Input. Input a new search term: ")
       elif search_input in namelist:
-          curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') " +
-                "from people p, drive_licence dl, driving_condition dc, restriction dr " +
-                "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
-          output = curs.fetchall()
-          for row in output:
-              print("\n")
-              display = []
-              for i in row:
-                  display.append(i.strip())
-              print("Driver Name: " + display[0])
-              print("Licence Number: " + display[1])
-              print("Address: " + display[2])
-              print("Birthday: " + display[3])
-              print("Driving Class: " + display[4])
-              print("Driving Condition: " + display[5])
-              print("Expiring Date: " + display[6])
-          return;
+         curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') " +
+               "from people p, drive_licence dl, driving_condition dc, restriction dr " +
+               "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
+         output = curs.fetchall()
+         for row in output:
+            print("\n")
+            display = []
+            for i in row:
+               display.append(i.strip())
+            print("Driver Name: " + display[0])
+            print("Licence Number: " + display[1])
+            print("Address: " + display[2])
+            print("Birthday: " + display[3])
+            print("Driving Class: " + display[4])
+            print("Driving Condition: " + display[5])
+            print("Expiring Date: " + display[6])
+         return;
       else:
-          redo = input("No results found. Redo search or exit to search menu? Redo/Exit ")
-          if redo == 'redo':
-              Search1(curs, connection)
-          else:
-              return
+         redo = input("No results found. Redo search or exit to search menu? Redo/Exit ")
+         if redo == 'redo':
+            Search1(curs, connection)
+         else:
+            return
