@@ -1,3 +1,6 @@
+# Avery Tan, Canopus Tong, Nathan Nguyen
+#Project 1 CMPUT291
+
 def Search1(curs, connection):
    '''
    List the name, licence_no, addr, birthday, driving class, driving_condition, 

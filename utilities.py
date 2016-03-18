@@ -1,4 +1,5 @@
-
+# Avery Tan, Canopus Tong, Nathan Nguyen
+#Project 1 CMPUT291
 
 
 import sys

@@ -1,5 +1,5 @@
-# Note: Python does not have an auto commit. Thus, commit at the end of each statement is important.
-# File from introduction to cx_oracle
+# Avery Tan, Canopus Tong, Nathan Nguyen
+#Project 1 CMPUT291
 
 
 
