@@ -397,8 +397,8 @@ def testingphoto(curs,connection):
    a = '200300'
    b = "111111111111115"
    c = 'a'
-   idd = '02-FEB-1999'
-   ed = '03-MAY-2010'
+   idd = ''
+   ed = ''
 
    insert = "insert into drive_licence values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"
    curs.execute(insert, {'licence_no':a, 'sin':b, 'class':c, 'photo': d, 'issuing_date':idd, 'expiring_date':ed})
