@@ -434,7 +434,11 @@ def ViolationRecord(curs,connection):
       execution = "select owner_id from owner where is_primary_owner = 'y' and vehicle_id = {}".format(vehicle_id)
       curs.execute(execution)
       primary_ownerresult = curs.fetchall()
-      vehicle_id = primary_ownerresult[0].strip()
+      list_primary_owner = list()
+      for i in primary_ownerresult:
+         list_primary_owner.append(i[0].strip())
+      print(list_primary_owner)
+      vehicle_id = list_primary_owner[0]
       print(vehicle_id)
 
 
