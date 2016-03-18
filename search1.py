@@ -48,18 +48,18 @@ def Search1(curs,connection):
                     "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
             output = curs.fetchall()
             print("output", output)
-               for row in output:
-                  print("\n")
-                  display = []
-                  for i in row:
-                     display.append(i.strip())
-                  print("Driver Name: " + display[0])
-                  print("Licence Number: " + display[1])
-                  print("Address: " + display[2])
-                  print("Birthday: " + display[3])
-                  print("Driving Class: " + display[4])
-                  print("Driving Condition: " + display[5])
-                  print("Expiring Date: " + display[6])
+            for row in output:
+               print("\n")
+               display = []
+               for i in row:
+                  display.append(i.strip())
+               print("Driver Name: " + display[0])
+               print("Licence Number: " + display[1])
+               print("Address: " + display[2])
+               print("Birthday: " + display[3])
+               print("Driving Class: " + display[4])
+               print("Driving Condition: " + display[5])
+               print("Expiring Date: " + display[6])
          ask = 0
       else:
          redo = input("No results found. Redo search or exit to search menu? Redo/Exit")
