@@ -453,50 +453,6 @@ def ViolationRecord(curs,connection):
    connection.commit()
 
 
-def Search1(curs,connection):
-   '''
-   List the name, licence_no, addr, birthday, driving class, driving_condition, 
-   and the expiring_data of a driver by entering either a licence_no or a given name. 
-   It shall display all the entries if a duplicate name is given.
-
-   Issues: How do we format the result output?
-   '''
-   curs.execute("SELECT name from people")
-   s1_col_pname = set(curs.fetchall())
-   real_s1_col_pname =set()
-   for i in s1_col_pname:
-      real_s1_col_pname.add(i[0].strip())
-
-   curs.execute("SELECT licence_no FROM drive_licence")
-   s1_col_dllicence = set(curs.fetchall())
-   real_s1_col_dllicence =set()
-   for i in s1_col_dllicence:
-      real_s1_col_dllicence.add(i[0].strip())
-
-
-   search_input = input("enter search term please")
-
-   if (search_input in real_s1_col_pname):
-      print(search_input)
-      execution = ("SELECT p.name, dl.licence_no, p.addr, p.birthday, dl.class, dc.description, dl.expiring_date FROM people p, drive_licence dl, drive_condition dc, restriction r WHERE dl.sin=p.sin AND dl.licence_no = r.licence_no AND r.r_id = dc.c_id AND p.name ="+"'"+search_input+"'")
-      print(execution)
-      print(type(execution))
-      curs.execute(execution)
-      print("YES")
-      s1_result = curs.fetchall()
-      print("search is  ", s1_result)
-      for r in s1_result:
-         print (r)
-         print("PASS!")
-   elif (search_input in real_s1_col_dllicence):
-      
-
-   else:
-      redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
-      if redo_or_exit =='redo':
-         Search1(curs,connection)
-      else:
-         return 
 
 
 def Search2(curs,connection):
