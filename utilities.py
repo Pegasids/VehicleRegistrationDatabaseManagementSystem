@@ -78,7 +78,7 @@ def Create_all_the_tables(curs,connection):
    connection.commit()
 
 
-def Populate_the_shit(curs,connection):
+def Populate(curs,connection):
    '''
    function which populates our database with tuples
 

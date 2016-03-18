@@ -90,7 +90,7 @@ def project():
         # create a cursor 
         curs = connection.cursor()
         #Create_all_the_tables(curs,connection)
-        #Populate_the_shit(curs,connection)
+        #Populate(curs,connection)
 
         # Prompt/Start the appliation programs
         applications(curs,connection)
