@@ -2,6 +2,7 @@ import sys
 import cx_Oracle # the package used for accessing Oracle in Python
 import getpass # the package for getting password from user without displaying it
 from avery import*
+from canopus import *
 
 def applications(curs,connection):                                                                        # starts application programs
     exit_code = False
