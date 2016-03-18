@@ -28,7 +28,7 @@ cursor.execute("create table pictures (photo_id integer, title varchar(10), plac
 pid=101
 title="Window"
 place="Utah" 
-dob = '02-FEB-1998'
+dob = '02-01-1998'
 #Load image into memory from local file 
 #(Assumes a file by this name exists in the directory you are running from)
 f_image  = open('sample.jpg','rb')
