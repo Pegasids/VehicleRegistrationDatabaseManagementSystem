@@ -5,12 +5,11 @@ import getpass # the package for getting password from user without displaying i
 from addperson import *
 from Auto_Transaction import *
 from utilities import*
-from search3 import *
+from Search_Functions import *
 from Violation_Record import*
 from Licence_Registration import*
 from Vehicle_Registration import *
-from search1 import*
-from search2 import*
+
 
 #our main application menu
 def applications(curs,connection):                                                                        # starts application programs
