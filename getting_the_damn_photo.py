@@ -15,13 +15,18 @@ def LicenceRegistration(curs,connection):
    list_sin_from_people_table = set(curs.fetchall())
    for i in list_sin_from_people_table:
       real_col.add(i[0].strip())
+
    curs.execute("SELECT licence_no from drive_licence")
    licence_no__drive_licence = set(curs.fetchall())
    real_licence_no__drive_licence = set()
    for i in licence_no__drive_licence:
       real_licence_no__drive_licence.add(i[0].strip())
 
-
+   curs.execute("SELECT sin from drive_licence")
+   ifalreadylicenced = set()
+   list_of_sinfromdrivelicence = curs.fetchall()
+   for i in list_of_sinfromdrivelicence:
+      ifalreadylicenced.add(i[0].strip())
 
    sin = input("please enter sin number")
 
@@ -29,8 +34,10 @@ def LicenceRegistration(curs,connection):
       sin = input("empty sin, please enter sin again or type exit to exit to main menu")
       if sin == "exit":
         return
-
-
+   while sin in ifalreadylicenced:
+      sin = input("this person with the sin already licenced. reenter the sin or type 'exit' to exit")
+      if sin == "exit":
+         return
 
    if sin not in real_col:
       choice = input("no sin found, would you like to add new person into people table? y/n")

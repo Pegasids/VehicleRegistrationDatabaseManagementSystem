@@ -53,7 +53,7 @@ def AutoTransaction(curs, connection):
 				connection.commit()
 
 		else:
-			applications(curs,connection)
+			return
 
 def getATdata(orows, sinrows, vrows, arows, curs):
 		# --------------------- Transaction ID ---------------------
@@ -101,10 +101,7 @@ def getATdata(orows, sinrows, vrows, arows, curs):
 					real_sin = []
 					for row in sin_data:
 						for i in row:
-							if i == None:
-								real_sin.append(i)
-							else:
-								real_sin.append(i.strip())
+							real_sin.append(i)
 					break
 				elif add == 'n' or add == 'N':
 					buyer_id = input("Enter a new buyer id.\n").strip()

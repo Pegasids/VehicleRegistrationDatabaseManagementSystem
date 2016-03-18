@@ -108,7 +108,7 @@ def Populate_the_shit(curs,connection):
    curs.setinputsizes(15, 40, float, float, 10,10,50,1,15) #position 8 is DATE! floats are number(5,2)
    curs.executemany("INSERT INTO people(sin, name, height, weight, eyecolor, haircolor, addr, gender,birthday) VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9)", data_peopletable)
 
-
+   print("pass people table")
    ####################################################################################################################################################################
 
 
@@ -132,7 +132,7 @@ def Populate_the_shit(curs,connection):
    curs.executemany("INSERT INTO drive_licence(licence_no,sin,class,photo,issuing_date, expiring_date) "
                                  "VALUES (:1, :2, :3, :4, :5, :6)", data_drivelicencetable)
 
-
+   print("pass drive_licence")
    # ############################################################################################################################################################################
 
    data_drivecondition = [(0, "operator must wear glasses at all times"),
@@ -144,7 +144,7 @@ def Populate_the_shit(curs,connection):
    curs.setinputsizes(int, 1024)
    curs.executemany("INSERT INTO driving_condition(c_id, description)"
                                  "VALUES(:1,:2)", data_drivecondition)
-
+   print("drivecondition pass")
 
    #############################################################################################################################################
 
@@ -162,7 +162,7 @@ def Populate_the_shit(curs,connection):
 
 
 
-
+   print("pass restriction")
 
 
    data_vehicletypetable = [(10,"SUV"), (11,"Hatchback"), (12,"Sedan"),(13,"Truck"),(14,"Van")]
@@ -172,7 +172,7 @@ def Populate_the_shit(curs,connection):
                                  "VALUES(:1,:2)", data_vehicletypetable)
 
 
-
+   print("pass vehicle type")
 
 
    data_vehicletable = [("122222222222220", "Honda", "Civic", 2004, "blue", 12),
@@ -423,15 +423,15 @@ def ViolationRecord(curs,connection):
       if vehicle_id == 'exit':
          return
 
-   primary_or_generic = input("Add to primary owner? enter yes or enter no to manually enter violator id")
+   primary_or_generic = input("Add to primary owner? enter y or enter n to manually enter violator id")
 
-   if primary_or_generic == 'no':
+   if primary_or_generic == 'n':
       violator_no = input("please enter violator no")
       while violator_no not in (real_col_sin__people):
          violator_no = input("no such violator exists. please reinput violator_no or type 'exit' to return ot main menu")
          if violator_no == 'exit':
             return
-   elif primary_or_generic =='yes':
+   elif primary_or_generic =='y':
       execution = "select owner_id from owner where is_primary_owner = 'y' and vehicle_id = {}".format(vehicle_id)
       curs.execute(execution)
       primary_ownerresult = curs.fetchall()
