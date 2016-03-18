@@ -390,12 +390,12 @@ def LicenceRegistration(curs,connection):
    connection.commit()
 
 def testingphoto(curs,connection):
-   photo = open('sample.jpg', 'rb')
-   image1 = photo.read()
-   curs.setinputsizes(image=cx_Oracle.BLOB)
+   photo1 = open('sample.jpg', 'rb')
+   image1 = photo1.read()
+   curs.setinputsizes(image1=cx_Oracle.BLOB)
    
-   licence_no1 = '20000'
-   sin1 = "111111111111111"
+   licence_no1 = '200300'
+   sin1 = "111111111111115"
    classs1 = 'a'
    issuing_date1 = '02-FEB-1999'
    expiring_date1 = '03-MAY-2010'
