@@ -416,17 +416,29 @@ def ViolationRecord(curs,connection):
       if ticker_no == 'exit':
          return
 
-   violator_no = input("please enter violator no")
-   while violator_no not in (real_col_sin__people):
-      violator_no = input("no such violator exists. please reinput violator_no or type 'exit' to return ot main menu")
-      if violator_no == 'exit':
-         return
-
    vehicle_id = input("please enter vehicle id")
    while vehicle_id not in real_col_veh_id__vehicle:
       vehicle_id = input("no such vehicle exists. please reenter vehicle id or type 'exit' to return to menu")
       if vehicle_id == 'exit':
          return
+
+   primary_or_generic = input("Add to primary owner? enter yes or enter no to manually enter violator id")
+
+   if primary_or_generic == 'no':
+      violator_no = input("please enter violator no")
+      while violator_no not in (real_col_sin__people):
+         violator_no = input("no such violator exists. please reinput violator_no or type 'exit' to return ot main menu")
+         if violator_no == 'exit':
+            return
+   elif primary_or_generic =='yes':
+      execution = "select owner_id from owner where is_primary_owner = 'y' and vehicle_id = {}".format(vehicle_id)
+      curs.execute(execution)
+      primary_ownerresult = curs.fetchall
+      real_primary_owner_result=set()
+      for i in primary_ownerresult:
+         vehicle_id = i[0].strip
+
+
 
    office_no = input("please enter officier number")
    while office_no not in real_col_sin__people:
