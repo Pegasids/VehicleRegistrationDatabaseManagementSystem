@@ -29,6 +29,8 @@ def applications(curs,connection):                                              
         elif key == 's' or key == 'S':
             print("")
             SearchEngine(curs, connection)
+        elif key =='photo':
+            testingphoto(curs,connection)
         else:
             print("")
             print("Invalid input, please enter a valid key")
