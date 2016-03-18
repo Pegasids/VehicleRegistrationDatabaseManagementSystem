@@ -453,8 +453,6 @@ def ViolationRecord(curs,connection):
    connection.commit()
 
 
-
-
 def Search2(curs,connection):
    '''
    List all violation records received by a person if  the drive 
@@ -474,10 +472,22 @@ def Search2(curs,connection):
    for i in s2_col_psin:
       real_s2_col_psin.add(i[0].strip())
 
+   print(real_s2_col_psin)
+   print('\n\n\n')
+   print(real_s2_col_dllicence)
+
+
 
    search_input = input("enter sin number or licence number please")
 
-   if (search_input in real_s2_col_psin) or (search_input in real_s2_col_dllicence):
+   if (search_input in real_s2_col_psin):
+      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
+      curs.execute(execution )
+      s2_result = curs.fetchall()
+      for r in s2_result:
+         print(r)
+
+   elif (search_input in real_s2_col_dllicence):
       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
