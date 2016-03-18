@@ -38,9 +38,9 @@ print (image)
 #cursor.setinputsizes(image=cx_Oracle.BLOB)
  
 insert = """insert into pictures (photo_id, title, place, image, birthday)
-   values (:photo_id, :title, :place, :image, :birthday)"""
+   values (:photo_id, :title, :place, :image, to_date(\':birthday\','DD-MM-YYYY')"""
 cursor.execute(insert,{'photo_id':pid, 'title':title,
-                           'place':place, 'image':image, 'birthday': dob})
+                           'place':place, 'image':image, 'birthday':dob})
 
 connection.commit()
 
