@@ -47,7 +47,7 @@ def Search1(curs,connection):
                     "from people p, drive_licence dl, driving_condition dc, restriction dr " +
                     "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
             output = curs.fetchall()
-               print("output", output)
+            print("output", output)
                for row in output:
                   print("\n")
                   display = []
