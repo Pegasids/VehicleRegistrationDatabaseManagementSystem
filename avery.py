@@ -390,10 +390,11 @@ def LicenceRegistration(curs,connection):
    connection.commit()
 
 def testingphoto(curs,connection):
-   photo1 = open('sample.jpg', 'rb')
-   d = photo1.read()
-   curs.setinputsizes(image1=cx_Oracle.BLOB)
-   
+   f_image = open('sample.jpg', 'rb')
+   image= f_image.read()
+
+   curs.setinputsizes(image=cx_Oracle.BLOB)
+   print(image)
    a = '200300'
    b = "111111111111115"
    c = 'a'
@@ -401,7 +402,7 @@ def testingphoto(curs,connection):
    ed = ''
 
    insert = "insert into drive_licence values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"
-   curs.execute(insert, {'licence_no':a, 'sin':b, 'class':c, 'photo': d, 'issuing_date':idd, 'expiring_date':ed})
+   curs.execute(insert, {'licence_no':a, 'sin':b, 'class':c, 'photo': image, 'issuing_date':idd, 'expiring_date':ed})
 
    connection.commit()
 
