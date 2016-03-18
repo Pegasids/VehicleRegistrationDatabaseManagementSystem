@@ -351,7 +351,7 @@ def LicenceRegistration(curs,connection):
          classs = input("please enter class")
          photo = open('sample.jpg', 'rb')
          read_photo = photo.read()
-         read_photo = ''
+         read_photo = input("photo name")
          curs.setinputsizes(read_photo=cx_Oracle.BLOB)
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
@@ -374,8 +374,8 @@ def LicenceRegistration(curs,connection):
          licence_no = input("license must be unique! please reenter")
       classs = input("please enter class")
       photo = open('sample.jpg', 'rb')
-      image = photo.read()
-      image_1 = ''
+      image = input("name of image with extension")
+      
       curs.setinputsizes(image_1=cx_Oracle.BLOB)      
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
@@ -383,9 +383,9 @@ def LicenceRegistration(curs,connection):
       if confirm =='y':
          print("About to enter")
 
-         #curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
-         insert = "insert into drive_licence values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"
-         curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image_1, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
+         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,image,issuing_date,expiring_date)))
+         #insert = "insert into drive_licence values(:licence_no, :sin, :class, :photo,:issuing_date, :expiring_date)"
+         #curs.execute(insert, {'licence_no':licence_no, 'sin':sin, 'class':classs, 'photo': image_1, 'issuing_date':issuing_date, 'expiring_date':expiring_date})
 
       else:
          return
