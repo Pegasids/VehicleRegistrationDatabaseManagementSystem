@@ -8,6 +8,7 @@ from canopus import *
 from getting_the_damn_photo import*
 from vehicle_registration_canopus import *
 from search1 import*
+from search2 import*
 
 
 def applications(curs,connection):                                                                        # starts application programs
