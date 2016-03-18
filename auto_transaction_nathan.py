@@ -28,7 +28,7 @@ def AutoTransaction(curs, connection):
 			confirm = input("Invalid input. Confirm?(y/n) ").strip()
 		if confirm == "y" or confirm == "Y":
 			# Insert values
-			if sin_data = []:
+			if sin_data == []:
 			curs.setinputsizes(15, 40, float, float, 10, 10, 50, 1, 7)
 			curs.execute("INSERT INTO people(sin, name, height, weight, eyecolor, haircolor, addr, gender, birthday) "
 								"VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9)", sin_data)
