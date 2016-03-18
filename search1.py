@@ -16,6 +16,7 @@ def Search1(curs, connection):
    for row in s1_col_dllicence:
       licencelist.append(row[0].strip())
    print(licencelist)
+   print(len(licencelist))
 
    ask = input("Do you want to enter a licence number or a name? (1/2)\n")
    while ask not in ['1', '2']:
