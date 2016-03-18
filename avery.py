@@ -289,7 +289,7 @@ def Populate_the_shit(curs,connection):
    connection.commit()
    print("populating database all done")
 
-
+#TESTED and DONE! (except for photo. Create a new function and keep this as is if you'd want to correc the photo function)
 def LicenceRegistration(curs,connection):
    """
    This component is used to record the information needed to issuing a 
@@ -376,6 +376,7 @@ def LicenceRegistration(curs,connection):
    connection.commit()
 
 
+#TESTED AND DONE! 100%
 def ViolationRecord(curs,connection):
    '''
    This component is used by a police officer to issue a traffic ticket and 
@@ -496,15 +497,17 @@ def Search2(curs,connection):
       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
-      for r in s2_result:
-         print(r)
+      print(s2_result)
+      # for r in s2_result:
+      #    print(r)
 
    elif (search_input in real_s2_col_dllicence):
       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
-      for r in s2_result:
-         print(r)
+      print(s2_result)
+      # for r in s2_result:
+      #    print(r)
 
    else:
       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
