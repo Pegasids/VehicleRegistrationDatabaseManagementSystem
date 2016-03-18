@@ -4,7 +4,7 @@ import getpass # the package for getting password from user without displaying i
 from addperson_nathan import *
 from auto_transaction_nathan import *
 from avery import*
-from canopus import *
+from search3 import *
 from getting_the_damn_photo import*
 from vehicle_registration_canopus import *
 from search1 import*
