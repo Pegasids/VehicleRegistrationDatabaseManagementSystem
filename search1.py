@@ -46,10 +46,10 @@ def Search1(curs,connection):
               curs.execute("SELECT p.name, dl.licence_no, p.addr, TO_CHAR(p.birthday, 'YYYY-MM-DD'), dl.class, dc.description, TO_CHAR(dl.expiring_date, 'YYYY-MM-DD') " +
                     "from people p, drive_licence dl, driving_condition dc, restriction dr " +
                     "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
-              print("hi2")
-              output = curs.fetchall()
-              print("output", output)
-              for row in output:
+                 print("hi2")
+                 output = curs.fetchall()
+                 print("output", output)
+                 for row in output:
                   print("\n")
                   display = []
                   for i in row:
@@ -61,7 +61,7 @@ def Search1(curs,connection):
                   print("Driving Class: " + display[4])
                   print("Driving Condition: " + display[5])
                   print("Expiring Date: " + display[6])
-      ask = 0
+         ask = 0
       else:
           redo = input("No results found. Redo search or exit to search menu? Redo/Exit")
           if redo == 'redo':
