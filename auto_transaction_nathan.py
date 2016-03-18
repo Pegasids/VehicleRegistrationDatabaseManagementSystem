@@ -4,7 +4,7 @@
 import sys
 import cx_Oracle # the package used for accessing Oracle in Python
 import getpass # the package for getting password from user without displaying it
-from addperson_nathan import *
+from addperson import *
 #-------------------------------------------Auto Transaction----------------------------------------------------
 def AutoTransaction(curs, connection):
 	# executing queries and get data
@@ -29,18 +29,29 @@ def AutoTransaction(curs, connection):
 		if confirm == "y" or confirm == "Y":
 			# Insert values
 			if sin_data == []:
-				curs.setinputsizes(15, 40, float, float, 10, 10, 50, 1, 7)
-				curs.execute("INSERT INTO people(sin, name, height, weight, eyecolor, haircolor, addr, gender, birthday) "
-									"VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9)", sin_data)
-				connection.commit()
 				curs.setinputsizes(int, 15, 15, 15, 7, float)
 				curs.execute("INSERT INTO auto_sale(transaction_id, seller_id, buyer_id, vehicle_id, s_date, price) "
-									"VALUES (:1, :2, :3, :4, :5, :6)", sale_data)
+								"VALUES (:1, :2, :3, :4, :5, :6)", sale_data)
 				connection.commit()
 				curs.execute("UPDATE owner SET owner_id = '" + buyer_id + "' WHERE owner_id = '" + seller_id + "' and vehicle_id = '" + vehicle_id + "'")
 				connection.commit()
 				curs.execute("DELETE from owner WHERE vehicle_id = '" + vehicle_id + "' and owner_id != '" + buyer_id + "'")
 				connection.commit()
+
+			else:
+				curs.setinputsizes(15, 40, float, float, 10, 10, 50, 1, 7)
+				curs.execute("INSERT INTO people(sin, name, height, weight, eyecolor, haircolor, addr, gender, birthday) "
+								"VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9)", sin_data)
+				connection.commit()
+				curs.setinputsizes(int, 15, 15, 15, 7, float)
+				curs.execute("INSERT INTO auto_sale(transaction_id, seller_id, buyer_id, vehicle_id, s_date, price) "
+								"VALUES (:1, :2, :3, :4, :5, :6)", sale_data)
+				connection.commit()
+				curs.execute("UPDATE owner SET owner_id = '" + buyer_id + "' WHERE owner_id = '" + seller_id + "' and vehicle_id = '" + vehicle_id + "'")
+				connection.commit()
+				curs.execute("DELETE from owner WHERE vehicle_id = '" + vehicle_id + "' and owner_id != '" + buyer_id + "'")
+				connection.commit()
+
 		else:
 			applications(curs,connection)
 
