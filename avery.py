@@ -16,7 +16,7 @@ def Create_all_the_tables(curs,connection):
    drop all previously created tables and create them new from scratch
    '''
 
-   tables = ["restriction","auto_sale", "drive_condition","ticket","ticket_type","drive_licence","owner","people","vehicle", "vehicle_type"]
+   tables = ["restriction","auto_sale", "driving_condition","ticket","ticket_type","drive_licence","owner","people","vehicle", "vehicle_type"]
    for i in tables:
       print("dropping  ", i)
       curs.execute("drop table "+str(i))
@@ -34,14 +34,14 @@ def Create_all_the_tables(curs,connection):
    "issuing_date DATE, expiring_date DATE,"
    "PRIMARY KEY (licence_no), UNIQUE (sin), FOREIGN KEY (sin) REFERENCES people ON DELETE CASCADE)")   
 
-   curs.execute("create table drive_condition "
+   curs.execute("create table driving_condition "
    "(c_id INTEGER, description VARCHAR(1024),"
    "PRIMARY KEY (c_id))")
    
    curs.execute("create table restriction "
    "(licence_no   CHAR(15), r_id INTEGER,"
    "PRIMARY KEY (licence_no, r_id), FOREIGN KEY (licence_no) REFERENCES drive_licence,"
-   "FOREIGN KEY (r_id) REFERENCES drive_condition)"
+   "FOREIGN KEY (r_id) REFERENCES driving_condition)"
    )
 
 
@@ -142,7 +142,7 @@ def Populate_the_shit(curs,connection):
                            (4,"Operator must be a Swifty")]
    curs.bindarraysize = 5
    curs.setinputsizes(int, 1024)
-   curs.executemany("INSERT INTO drive_condition(c_id, description)"
+   curs.executemany("INSERT INTO driving_condition(c_id, description)"
                                  "VALUES(:1,:2)", data_drivecondition)
 
 
