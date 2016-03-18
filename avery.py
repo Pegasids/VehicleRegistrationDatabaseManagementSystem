@@ -289,91 +289,91 @@ def Populate_the_shit(curs,connection):
    connection.commit()
    print("populating database all done")
 
-#TESTED and DONE! (except for photo. Create a new function and keep this as is if you'd want to correc the photo function)
-def LicenceRegistration(curs,connection):
-   """
-   This component is used to record the information needed to issuing a 
-   drive licence, including the personal information and a picture for 
-   the driver. You may assume that all the image files are stored in a 
-   local disk system.
+# #TESTED and DONE! (except for photo. Create a new function and keep this as is if you'd want to correc the photo function)
+# def LicenceRegistration(curs,connection):
+#    """
+#    This component is used to record the information needed to issuing a 
+#    drive licence, including the personal information and a picture for 
+#    the driver. You may assume that all the image files are stored in a 
+#    local disk system.
 
-   known issues: Unknown format for DATE and BLOB
-   """
-   exit_flag = False
-   curs.execute("SELECT sin from people")
-   real_col = set()
-   list_sin_from_people_table = set(curs.fetchall())
-   for i in list_sin_from_people_table:
-      real_col.add(i[0].strip())
-   curs.execute("SELECT licence_no from drive_licence")
-   licence_no__drive_licence = set(curs.fetchall())
-   real_licence_no__drive_licence = set()
-   for i in licence_no__drive_licence:
-      real_licence_no__drive_licence.add(i[0].strip())
-
-
-
-   sin = input("please enter sin number")
-
-   while sin =='':
-      sin = input("empty sin, please enter sin again or type exit to exit to main menu")
-      if sin == "exit":
-        return
+#    known issues: Unknown format for DATE and BLOB
+#    """
+#    exit_flag = False
+#    curs.execute("SELECT sin from people")
+#    real_col = set()
+#    list_sin_from_people_table = set(curs.fetchall())
+#    for i in list_sin_from_people_table:
+#       real_col.add(i[0].strip())
+#    curs.execute("SELECT licence_no from drive_licence")
+#    licence_no__drive_licence = set(curs.fetchall())
+#    real_licence_no__drive_licence = set()
+#    for i in licence_no__drive_licence:
+#       real_licence_no__drive_licence.add(i[0].strip())
 
 
 
-   if sin not in real_col:
-      choice = input("no sin found, would you like to add new person into people table? y/n")
-      if choice =='y':
-         p_name = input("please enter people name")
-         p_height = input("please enter height")
-         p_weight = input("please enter weight")
-         p_eyecolor = input("please enter eyecolor")
-         p_haircolor = input("please enter haircolor")
-         p_addr = input("please enter address")
-         p_gender = input("please enter gender. m/f")
-         p_birthday = input("please enter birthday")
-         confirm = input("confirm entering:({},{},{},{},{},{},{},{},{}) Enter y to confirm, n to return to main menu".format(sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday))
-         values = (sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday)
-         if confirm == 'y':
-            curs.execute("INSERT INTO people VALUES "+str(values) )
-            connection.commit()
-         else:
-            return
+#    sin = input("please enter sin number")
 
-         licence_no = input("please enter license number")
-         while licence_no in real_licence_no__drive_licence:
-            licence_no = input("license number already exists, enter a unique one please")
-         classs = input("please enter class")
-         photo = input("please enter photo")
-         issuing_date = input("please enter issuing date")
-         expiring_date = input("please enter expry date")
-         confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
-         if confirm == 'y':
-            curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
-         else: 
-            return
+#    while sin =='':
+#       sin = input("empty sin, please enter sin again or type exit to exit to main menu")
+#       if sin == "exit":
+#         return
 
-      elif choice =='n':
-         exit_or_redo = input("would you like to reinput the sin number or exit driver licence registration input? input 'redo' or 'exit'")
-         if exit_or_redo == 'exit':
-            return
-         elif exit_or_redo =='redo':
-            LicenceRegistration(curs,connection)
-   else:
-      licence_no = input("please enter license number")
-      while licence_no in real_licence_no__drive_licence:
-         licence_no = input("license must be unique! please reenter")
-      classs = input("please enter class")
-      photo = input("please enter photo name with extension")
-      issuing_date = input("please enter issuing date")
-      expiring_date = input("please enter expry date")
-      confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
-      if confirm =='y':
-         curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
-      else:
-         return
-   connection.commit()
+
+
+#    if sin not in real_col:
+#       choice = input("no sin found, would you like to add new person into people table? y/n")
+#       if choice =='y':
+#          p_name = input("please enter people name")
+#          p_height = input("please enter height")
+#          p_weight = input("please enter weight")
+#          p_eyecolor = input("please enter eyecolor")
+#          p_haircolor = input("please enter haircolor")
+#          p_addr = input("please enter address")
+#          p_gender = input("please enter gender. m/f")
+#          p_birthday = input("please enter birthday")
+#          confirm = input("confirm entering:({},{},{},{},{},{},{},{},{}) Enter y to confirm, n to return to main menu".format(sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday))
+#          values = (sin,p_name,p_height,p_weight,p_eyecolor,p_haircolor,p_addr,p_gender,p_birthday)
+#          if confirm == 'y':
+#             curs.execute("INSERT INTO people VALUES "+str(values) )
+#             connection.commit()
+#          else:
+#             return
+
+#          licence_no = input("please enter license number")
+#          while licence_no in real_licence_no__drive_licence:
+#             licence_no = input("license number already exists, enter a unique one please")
+#          classs = input("please enter class")
+#          photo = input("please enter photo")
+#          issuing_date = input("please enter issuing date")
+#          expiring_date = input("please enter expry date")
+#          confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+#          if confirm == 'y':
+#             curs.execute("INSERT INTO drive_licence VALUES" +str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+#          else: 
+#             return
+
+#       elif choice =='n':
+#          exit_or_redo = input("would you like to reinput the sin number or exit driver licence registration input? input 'redo' or 'exit'")
+#          if exit_or_redo == 'exit':
+#             return
+#          elif exit_or_redo =='redo':
+#             LicenceRegistration(curs,connection)
+#    else:
+#       licence_no = input("please enter license number")
+#       while licence_no in real_licence_no__drive_licence:
+#          licence_no = input("license must be unique! please reenter")
+#       classs = input("please enter class")
+#       photo = input("please enter photo name with extension")
+#       issuing_date = input("please enter issuing date")
+#       expiring_date = input("please enter expry date")
+#       confirm = input("confirm entering({},{},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,photo,issuing_date,expiring_date))
+#       if confirm =='y':
+#          curs.execute("INSERT INTO drive_licence VALUES"+str((licence_no,sin,classs,photo,issuing_date,expiring_date)))
+#       else:
+#          return
+#    connection.commit()
 
 
 #TESTED AND DONE! 100%
@@ -466,75 +466,75 @@ def ViolationRecord(curs,connection):
    connection.commit()
 
 
-def Search2(curs,connection):
-   '''
-   List all violation records received by a person if  the drive 
-   licence_no or sin of a person  is entered.
+# def Search2(curs,connection):
+#    '''
+#    List all violation records received by a person if  the drive 
+#    licence_no or sin of a person  is entered.
 
-   Issues: same as above, how is results expected to be formated?
-   '''
-   curs.execute("SELECT licence_no FROM drive_licence")
-   s2_col_dllicence = set(curs.fetchall()) #list contains all licence_no from drive_licence table
-   real_s2_col_dllicence = set()
-   for i in s2_col_dllicence:
-      real_s2_col_dllicence.add(i[0].strip())
+#    Issues: same as above, how is results expected to be formated?
+#    '''
+#    curs.execute("SELECT licence_no FROM drive_licence")
+#    s2_col_dllicence = set(curs.fetchall()) #list contains all licence_no from drive_licence table
+#    real_s2_col_dllicence = set()
+#    for i in s2_col_dllicence:
+#       real_s2_col_dllicence.add(i[0].strip())
 
-   curs.execute("SELECT sin FROM people")
-   s2_col_psin = set(curs.fetchall()) # list contains all sin number from people table
-   real_s2_col_psin = set()
-   for i in s2_col_psin:
-      real_s2_col_psin.add(i[0].strip())
+#    curs.execute("SELECT sin FROM people")
+#    s2_col_psin = set(curs.fetchall()) # list contains all sin number from people table
+#    real_s2_col_psin = set()
+#    for i in s2_col_psin:
+#       real_s2_col_psin.add(i[0].strip())
 
-   print(real_s2_col_psin)
-   print('\n\n\n')
-   print(real_s2_col_dllicence)
-
-
-
-   search_input = input("enter sin number or licence number please")
-
-   if (search_input in real_s2_col_psin):
-      print("searching sin num")
-      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
-      curs.execute(execution )
-      s2_result = curs.fetchall()
-      print(s2_result)
-      # for r in s2_result:
-      #    print(r)
-
-   elif (search_input in real_s2_col_dllicence):
-      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and dl.licence_no = '{}'".format(search_input)
-      curs.execute(execution )
-      s2_result = curs.fetchall()
-      print(s2_result)
-      # for r in s2_result:
-      #    print(r)
-
-   else:
-      redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
-      if redo_or_exit =='redo':
-         Search2(curs,connection)
-      else:
-         return 
+#    print(real_s2_col_psin)
+#    print('\n\n\n')
+#    print(real_s2_col_dllicence)
 
 
-def Search3(curs,connection): #the sql query hasn't been built yet. Will get to that eventually, unless you guys there before me
-   '''
-   Print out the vehicle_history, including the number of times that a vehicle has 
-   been changed hand, the average price, and the number of violations it has been 
-   involved by entering the vehicle's serial number.
-   '''
-   curs.execute("SELECT serial_no FROM vehicle")
-   s3_col_vserial = curs.fetchall()
 
-   search_input = input("Enter vehicle serial number")
+#    search_input = input("enter sin number or licence number please")
 
-   if search_input in s3_col_vserial:
-      pass
-   else:
-      redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
-      if redo_or_exit =='redo':
-         Search3(curs)
-      elif redo_or_exit == 'exit':
-         return 0
+#    if (search_input in real_s2_col_psin):
+#       print("searching sin num")
+#       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
+#       curs.execute(execution )
+#       s2_result = curs.fetchall()
+#       print(s2_result)
+#       # for r in s2_result:
+#       #    print(r)
+
+#    elif (search_input in real_s2_col_dllicence):
+#       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and dl.licence_no = '{}'".format(search_input)
+#       curs.execute(execution )
+#       s2_result = curs.fetchall()
+#       print(s2_result)
+#       # for r in s2_result:
+#       #    print(r)
+
+#    else:
+#       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
+#       if redo_or_exit =='redo':
+#          Search2(curs,connection)
+#       else:
+#          return 
+
+
+# def Search3(curs,connection): #the sql query hasn't been built yet. Will get to that eventually, unless you guys there before me
+#    '''
+#    Print out the vehicle_history, including the number of times that a vehicle has 
+#    been changed hand, the average price, and the number of violations it has been 
+#    involved by entering the vehicle's serial number.
+#    '''
+#    curs.execute("SELECT serial_no FROM vehicle")
+#    s3_col_vserial = curs.fetchall()
+
+#    search_input = input("Enter vehicle serial number")
+
+#    if search_input in s3_col_vserial:
+#       pass
+#    else:
+#       redo_or_exit = input("No results found. Redo search or exit to search menu? redo/exit")
+#       if redo_or_exit =='redo':
+#          Search3(curs)
+#       elif redo_or_exit == 'exit':
+#          return 0
 

@@ -2,6 +2,8 @@ import sys
 import cx_Oracle # the package used for accessing Oracle in Python
 import getpass # the package for getting password from user without displaying it
 
+
+#Search 3 works PERFECTLY!
 def Search3(curs,connection): #the sql query hasn't been built yet. Will get to that eventually, unless you guys there before me
 	
 	curs.execute("SELECT serial_no FROM vehicle")
