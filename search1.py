@@ -4,9 +4,7 @@ def Search1(curs, connection):
    and the expiring_data of a driver by entering either a licence_no or a given name. 
    It shall display all the entries if a duplicate name is given.
    '''
-   print("hi")
    curs.execute("SELECT name from people p, drive_licence dl where p.sin = dl.sin")
-   print("hi1")
    s1_col_pname = curs.fetchall()
    namelist = []
    for row in s1_col_pname:
@@ -30,6 +28,7 @@ def Search1(curs, connection):
                 "from people p, drive_licence dl, driving_condition dc, restriction dr " +
                 "where dl.sin = p.sin and dl.licence_no = '" + search_input + "' and dr.licence_no = '" + search_input + "' and dr.r_id = dc.c_id")
          output = curs.fetchall()
+         print(output)
          for row in output:
             print("\n")
             display = []
