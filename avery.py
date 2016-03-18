@@ -434,10 +434,8 @@ def ViolationRecord(curs,connection):
       execution = "select owner_id from owner where is_primary_owner = 'y' and vehicle_id = {}".format(vehicle_id)
       curs.execute(execution)
       primary_ownerresult = curs.fetchall()
-      real_primary_owner_result=set()
-      print(primary_ownerresult)
-      return
-
+      vehicle_id = primary_ownerresult[0].strip()
+      print(vehicle_id)
 
 
    office_no = input("please enter officier number")
