@@ -61,7 +61,7 @@ def Search1(curs,connection):
                   print("Driving Class: " + display[4])
                   print("Driving Condition: " + display[5])
                   print("Expiring Date: " + display[6])
-
+      ask = 0
       else:
           redo = input("No results found. Redo search or exit to search menu? Redo/Exit")
           if redo == 'redo':
