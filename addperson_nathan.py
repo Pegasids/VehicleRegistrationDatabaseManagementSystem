@@ -23,7 +23,7 @@ def add_sin(owner_id):
 	if height == "": 
 		height = None
 	else:
-		height = float("{0:.2f}".format(float(height))
+		height = float("{0:.2f}".format(float(height)))
 	new_people1d.append(height)
 
 	weight = input("Weight? ")
