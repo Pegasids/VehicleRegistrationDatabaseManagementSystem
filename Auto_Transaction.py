@@ -6,7 +6,7 @@ import cx_Oracle # The package used for accessing Oracle in Python
 import getpass # The package for getting password from user without displaying it\
 
 # Imports addperson to add a new person 
-from addperson_nathan import *
+from addperson import *
 
 #------------------------------------------------Auto Transaction----------------------------------------------------
 def AutoTransaction(curs, connection):
