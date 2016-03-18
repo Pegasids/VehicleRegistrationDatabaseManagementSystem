@@ -437,10 +437,8 @@ def ViolationRecord(curs,connection):
       list_primary_owner = list()
       for i in primary_ownerresult:
          list_primary_owner.append(i[0].strip())
-      print(list_primary_owner)
-      vehicle_id = list_primary_owner[0]
-      print(vehicle_id)
-
+         violator_no = list_primary_owner[0]
+   print("driver ", violator_no, "will be charged! ")
 
    office_no = input("please enter officier number")
    while office_no not in real_col_sin__people:
