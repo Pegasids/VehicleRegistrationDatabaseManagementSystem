@@ -48,6 +48,7 @@ def Search1(curs,connection):
                     "where p.name = '" + search_input + "' and dl.sin = p.sin and dl.licence_no = dr.licence_no and dr.r_id = dc.c_id")
               print("hi2")
               output = curs.fetchall()
+              print("output", output)
               for row in output:
                   print("\n")
                   display = []
