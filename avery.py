@@ -375,7 +375,7 @@ def LicenceRegistration(curs,connection):
       photo = open('sample.jpg', 'rb')
       image = photo.read()
       image_1 = ''
-      curs.setinputsizes(image=cx_Oracle.BLOB)      
+      curs.setinputsizes(image_1=cx_Oracle.BLOB)      
       issuing_date = input("please enter issuing date")
       expiring_date = input("please enter expry date")
       confirm = input("confirm entering({},{},{},{},{}) enter y to confirm, n to exit to main menu".format(licence_no,sin,classs,issuing_date,expiring_date))
