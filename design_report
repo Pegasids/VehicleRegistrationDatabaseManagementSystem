@@ -10,32 +10,42 @@ The database contains 7 module python files:
 main.py
 	This module is the python file that is run from the command shell! It imports all functions from every other module. It authenticates the user and then brings up the databases menus that users can navigate. The menus allow the user to access all the database features. It starts with the main menu where the 4 database insert features can be accessed along with the search menu. In the search menu, users can use the 3 database search features or return to the main menu. The user closes the program through the main menu.
 
+	The main function of significance is the "applications" function which runs our main menu and the "SearchEngine" function which runs our search engine menu. 
+
 
 utilities.py
-	utilities was used to test the database system and contains functions for table creation as well as importing test data into those tables so that our team could test all features of the database system. This functions are disabled(not called) in the final version of the system
+	utilities was used to test the database system and contains functions for table creation as well as importing test data into those tables so that our team could test all features of the database system. This functions are disabled(not called) in the final version of the system. The function "Create_all_the_tables" defines our tables and the function "Populate" populates them with test data.
 
 
 Auto_Transaction.py
 	This module contains all functions required to complete and verify an auto transaction. The function, AutoTransaction(curs,connection) is called from the main menu and allows users to enter a new auto transaction. Ensures that sellers exist in our system or returns an error message. It also registers the new owner if his details are not present in the system. It also ensures that the vehicle exists in our system and that the seller is a primary owner of that vehicle.
+	The main function of interest is the "AutoTransaction" function which runs the feature.
 
 
 Licence_Registration.py
 	This module contains the function LicenceRegistration(curs,connection) necessary to complete and verify a new licence registration. This function is called from our main.py module in the main menu. This feature forces users to enter details of a new person if that person does not yet exist in the system. It also prevents a person who already has a licence from registering another one. 
+	The main function of interest is "LicenceRegistration" which runs the feature
 
 
 Vehicle_Registration.py
 	This module contains all functions required to complete a new vehicle registration. This function is called from our main.py module in the main menu. It ensures that users cannot enter a non-unique vehicle_id and forces users to enter details of a new person if that person does not exist in the system. 
+	The main function of interest is "VehicleRegistration" which runs the feature.
 
 
 Violation_Record.py
 	This module contains the single function ViolationRecord(curs,connection) which allows users to enter a new violation record. This module is called from the main.py module in the main menu.
 	This feature asserts that the person being fined as well as the vehicle being fined exist in our system and allows users to automatically fine the primary owner of the vehicle or to manually enter in the details of the individual being fined.
+	The main function of interest is "ViolationRecord" which runs the feature.
 
 
 Search_Functions
 	This module contains our 3 search functions that allow users to use them. They are called from the main.py module in the search menu. 
+
+		The function "Search1" runs the following feature.
 		It allows users to get details of a driver from entering his licence number or name
 		
+		The function "Search2" runs the following feature.
 		It allows users to get violation records of drivers from entering their licence number or sin numbers
 
+		The function "Search3" runs the following feature.
 		it allows users to get the full vehicle history of a vehicle by entering the vehicle id.
