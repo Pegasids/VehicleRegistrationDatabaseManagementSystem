@@ -21,7 +21,7 @@ def applications(curs,connection):                                              
         print("| 'R' Driver Licence Registration |")
         print("| 'V' Violation Record            |")
         print("| 'S' Search Engine               |")
-        print("| 'exitmain' exit                 |")
+        print("| '0' exit                        |")
         print("")
         key = input("Input a key: ")
         if key == 'n' or key == 'N':
@@ -39,7 +39,7 @@ def applications(curs,connection):                                              
         elif key == 's' or key == 'S':
             print("")
             SearchEngine(curs, connection)
-        elif key =='exitmain':
+        elif key =='0':
             return
         else:
             print("")
