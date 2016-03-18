@@ -67,7 +67,7 @@ def SearchEngine(curs, connection):
             print('')
             Search3(curs,connection)
         else:
-            applications(curs,connection)
+            return
 
 
 #this function establishes the connection and then starts up our main menu
