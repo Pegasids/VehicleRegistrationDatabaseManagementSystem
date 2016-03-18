@@ -494,6 +494,7 @@ def Search2(curs,connection):
    search_input = input("enter sin number or licence number please")
 
    if (search_input in real_s2_col_psin):
+      print("searching sin num")
       execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
@@ -502,7 +503,7 @@ def Search2(curs,connection):
       #    print(r)
 
    elif (search_input in real_s2_col_dllicence):
-      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and p.sin = '{}'".format(search_input)
+      execution = "SELECT p.name, dl.licence_no, t.ticket_no, t.vehicle_id, t.vtype, t.vdate, t.place, t.descriptions, tt.fine FROM ticket t, ticket_type tt, people p, drive_licence dl WHERE p.sin = t.violator_no AND p.sin = dl.sin AND tt.vtype = t.vtype and dl.licence_no = '{}'".format(search_input)
       curs.execute(execution )
       s2_result = curs.fetchall()
       print(s2_result)
