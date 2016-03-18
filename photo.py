@@ -38,7 +38,7 @@ print (image)
 cursor.setinputsizes(image=cx_Oracle.BLOB)
  
 insert = """insert into pictures (photo_id, title, place, image)
-   values (:photo_id, :title, :place, :image)"""
+   values (:photo_id, :title, :place, :image, :birthday)"""
 cursor.execute(insert,{'photo_id':pid, 'title':title,
                            'place':place, 'image':image, 'birthday': dob})
 
