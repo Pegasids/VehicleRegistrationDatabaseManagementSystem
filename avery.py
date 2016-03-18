@@ -3,7 +3,7 @@ this contains 4 functions which should be functional if copied and pasted into t
 Populate_the_shit(curs) is the only function which is still not yet defined. 
 Hoping to work on this and have this up soemtime tomorrow or the day after - Avery
 """
-
+#line 28 photo is char cause I can't figure it out
 
 import sys
 import cx_Oracle
@@ -30,7 +30,7 @@ def Create_all_the_tables(curs,connection):
    "PRIMARY KEY (sin), CHECK ( gender IN ('m', 'f') ))")
 
    curs.execute("create table drive_licence "
-   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo BLOB,"
+   "(licence_no CHAR(15), sin char(15), class VARCHAR(10), photo CHAR(20),"
    "issuing_date DATE, expiring_date DATE,"
    "PRIMARY KEY (licence_no), UNIQUE (sin), FOREIGN KEY (sin) REFERENCES people ON DELETE CASCADE)")   
 
@@ -351,6 +351,7 @@ def LicenceRegistration(curs,connection):
          classs = input("please enter class")
          photo = open('sample.jpg', 'rb')
          read_photo = photo.read()
+         read_photo = ''
          curs.setinputsizes(read_photo=cx_Oracle.BLOB)
          issuing_date = input("please enter issuing date")
          expiring_date = input("please enter expry date")
