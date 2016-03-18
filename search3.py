@@ -2,8 +2,6 @@ import sys
 import cx_Oracle # the package used for accessing Oracle in Python
 import getpass # the package for getting password from user without displaying it
 
-
-#Search 3 works PERFECTLY!
 def Search3(curs,connection): #the sql query hasn't been built yet. Will get to that eventually, unless you guys there before me
 	
 	curs.execute("SELECT serial_no FROM vehicle")
@@ -12,7 +10,7 @@ def Search3(curs,connection): #the sql query hasn't been built yet. Will get to 
 	for vrow in s3_col_vserial:
 		vrowlst.append(vrow[0].strip())
 
-	serial_no = input("Enter vehicle serial number: ")
+	serial_no = input("Enter vehicle serial number: ").strip()
 	while serial_no == "" or serial_no not in vrowlst:
 		if serial_no not in vrowlst:
 			serial_no = input("Vehicle already does not exist in database. Serial Number? or type 'exit' to main menu ").strip()
@@ -26,9 +24,9 @@ def Search3(curs,connection): #the sql query hasn't been built yet. Will get to 
 	
 	curs.execute("select SERIAL_A SERIAL_NO, NUMBER_SALES, AVERAGE_PRICE, TOTAL_TICKETS from (SELECT v.serial_no SERIAL_A, count(distinct a.transaction_id) NUMBER_SALES, avg(a.price) AVERAGE_PRICE from (vehicle v left outer join auto_sale a on v.serial_no = a.vehicle_id) group by v.serial_no), (SELECT f.serial_no SERIAL_B, count(distinct t.ticket_no) TOTAL_TICKETS from (vehicle f left outer join ticket t on f.serial_no = t.vehicle_id) group by f.serial_no) where SERIAL_A = SERIAL_B and SERIAL_A = '" + serial_no + "'")
 
-	print(" SERIAL_NO       , NUMBER_SALES, AVERAGE_PRICE, TOTAL_TICKETS")
 	v_history = curs.fetchall()
 	for v_history_row in v_history:
-		print(v_history_row)
-
-
+		print("Serial Number: ", v_history_row[0])
+		print("Number of sales: ", v_history_row[1])
+		print("Average price: ", v_history_row[2])
+		print("Total tickets: ", v_history_row[3])
