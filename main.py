@@ -2,7 +2,6 @@ import sys
 import cx_Oracle # the package used for accessing Oracle in Python
 import getpass # the package for getting password from user without displaying it
 #our different modules
-from addperson import *
 from Auto_Transaction import *
 from utilities import*
 from Search_Functions import *
