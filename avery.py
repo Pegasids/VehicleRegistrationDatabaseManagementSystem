@@ -16,11 +16,11 @@ def Create_all_the_tables(curs,connection):
    drop all previously created tables and create them new from scratch
    '''
 
-   # tables = ["restriction","auto_sale", "driving_condition","ticket","ticket_type","drive_licence","owner","people","vehicle", "vehicle_type"]
-   # for i in tables:
-   #    print("dropping  ", i)
-   #    curs.execute("drop table "+str(i))
-   # print("PASS!")
+   tables = ["restriction","auto_sale", "driving_condition","ticket","ticket_type","drive_licence","owner","people","vehicle", "vehicle_type"]
+   for i in tables:
+      print("dropping  ", i)
+      curs.execute("drop table "+str(i))
+   print("PASS!")
 
 
    curs.execute("create table people "
