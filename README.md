@@ -33,9 +33,9 @@ List all violation records received by a person if  the drive licence_no or sin 
 - [ ] 
 Print out the vehicle_history, including the number of times that a vehicle has been changed hand, the average price, and the number of violations it has been involved by entering the vehicle's serial number.
 
-*extract all documents and place them into the same directory
-*use the command shell to navigate to the directory where all the files are store
-*run "python3 main.py" to start the application
-*authenticate with your oracle username and password when requested. 
-*You will arrive in the main menu. Enter the character corresponding to the function or feature you would like to run in the main menu.
-*To exit the application, close or finish any database process currently started and then navigate back to the main menu. At the main menu, enter 0 to close the program.
+*extract all documents and place them into the same directory<br />
+*use the command shell to navigate to the directory where all the files are store<br />
+*run "python3 main.py" to start the application<br />
+*authenticate with your oracle username and password when requested. <br />
+*You will arrive in the main menu. Enter the character corresponding to the function or feature you would like to run in the main menu.<br />
+*To exit the application, close or finish any database process currently started and then navigate back to the main menu. At the main menu, enter 0 to close the program.<br />
