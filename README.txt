@@ -1,6 +1,5 @@
 Avery Tan, Canopus Tong, Nathan Nguyen
 
-#CMPUT 291 - Mini Project 1
 The system consists of the following five application programs
 
 ## New Vehicle Registration
@@ -33,8 +32,6 @@ List the name, licence_no, addr, birthday, driving class, driving_condition, and
 List all violation records received by a person if  the drive licence_no or sin of a person  is entered.
 - [ ] 
 Print out the vehicle_history, including the number of times that a vehicle has been changed hand, the average price, and the number of violations it has been involved by entering the vehicle's serial number.
-
-README
 
 *extract all documents and place them into the same directory
 *use the command shell to navigate to the directory where all the files are store
